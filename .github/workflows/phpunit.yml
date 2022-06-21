@@ -5,8 +5,8 @@ on:
     branches:
       - trunk
   pull_request:
-	branches:
-	  - trunk
+    branches:
+      - trunk
 
 jobs:
   phpunit:
@@ -31,15 +31,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4', '8.0', '8.1']
-        wordpress: ['trunk']
+        php: ['7.4', '8.0']
+        wordpress: ['latest']
         experimental: [false]
         include:
-          - php: '7.4'
-            wordpress: 'latest'
-            experimental: false
-          - php: '8.0'
-            wordpress: 'latest'
+          - php: '8.1'
+            wordpress: 'trunk'
             experimental: true
 
     steps:
