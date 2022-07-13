@@ -29,5 +29,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+require_once __DIR__ . '/includes/api.php';
 require_once __DIR__ . '/includes/sync.php';
 require_once __DIR__ . '/includes/taxonomy.php';
