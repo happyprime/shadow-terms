@@ -10,6 +10,7 @@ namespace ShadowTerms\Taxonomy;
 use ShadowTerms\API;
 
 add_action( 'init', __NAMESPACE__ . '\register', 9999 );
+add_action( 'rest_api_init', __NAMESPACE__ . '\register_route' );
 
 /**
  * Register all shadow taxonomies.
@@ -21,7 +22,12 @@ function register() {
 		register_taxonomy( $post_type );
 		register_rest_fields( $post_type );
 	}
+}
 
+/**
+ * Register Shadow Term REST routes.
+ */
+function register_route() {
 	// Register a REST route used to associate posts with a post's shadow term.
 	register_rest_route(
 		'shadow-terms/v1',
