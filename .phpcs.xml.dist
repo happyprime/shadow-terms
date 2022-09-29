@@ -45,4 +45,9 @@
 			<property name="blank_line_check" value="true"/>
 		</properties>
 	</rule>
+
+	<!-- WordPress should allow short array syntax. -->
+	<rule ref="Generic.Arrays.DisallowShortArraySyntax">
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+	</rule>
 </ruleset>
