@@ -126,12 +126,31 @@ function handle_rest_associate( \WP_REST_Request $request ) : \WP_REST_Response 
 			API\update_associated_posts( $post_id, $associated_posts );
 		}
 
-		return rest_ensure_response( [] );
+		return rest_ensure_response( [ 'posts' => $associated_posts ] );
 	}
 
 	wp_set_object_terms( $associated_post_id, API\get_term_id( $post_id ), API\get_taxonomy_slug( $post_id ) );
 
-	return rest_ensure_response( [] );
+	$associated_post  = get_post( $associated_post_id );
+	$associated_posts = new \WP_Query(
+		[
+			'fields'                 => 'ids',
+			'post_type'              => $associated_post->post_type,
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_term_meta_cache' => false,
+			'tax_query'              => [
+				[
+					'taxonomy' => API\get_taxonomy_slug( $post_id ),
+					'field'    => 'term_id',
+					'terms'    => [ API\get_term_id( $post_id ) ],
+				],
+			],
+			'post_status'            => [ 'publish', 'draft' ],
+		]
+	);
+
+	return rest_ensure_response( [ 'posts' => $associated_posts->posts ] );
 }
 
 /**
