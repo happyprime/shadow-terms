@@ -111,6 +111,7 @@ function handle_rest_associate( \WP_REST_Request $request ) : \WP_REST_Response 
 			[
 				'success' => false,
 				'message' => 'This post type is not associated with a shadow taxonomy.',
+				'posts'   => [],
 			]
 		);
 	}
@@ -125,7 +126,13 @@ function handle_rest_associate( \WP_REST_Request $request ) : \WP_REST_Response 
 			API\update_associated_posts( $post_id, $associated_posts );
 		}
 
-		return rest_ensure_response( [ 'posts' => $associated_posts ] );
+		return rest_ensure_response(
+			[
+				'success' => true,
+				'message' => '',
+				'posts'   => $associated_posts,
+			]
+		);
 	}
 
 	wp_set_object_terms( $associated_post_id, API\get_term_id( $post_id ), API\get_taxonomy_slug( $post_id ) );
@@ -149,5 +156,11 @@ function handle_rest_associate( \WP_REST_Request $request ) : \WP_REST_Response 
 		]
 	);
 
-	return rest_ensure_response( [ 'posts' => $associated_posts->posts ] );
+	return rest_ensure_response(
+		[
+			'success' => true,
+			'message' => '',
+			'posts'   => $associated_posts->posts,
+		]
+	);
 }
