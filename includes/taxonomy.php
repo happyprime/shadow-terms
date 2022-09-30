@@ -20,7 +20,6 @@ function register() {
 
 	foreach ( $post_types as $post_type ) {
 		register_taxonomy( $post_type );
-		register_rest_fields( $post_type );
 	}
 }
 
@@ -151,43 +150,6 @@ function handle_rest_associate( \WP_REST_Request $request ) : \WP_REST_Response 
 	);
 
 	return rest_ensure_response( [ 'posts' => $associated_posts->posts ] );
-}
-
-/**
- * Register a field on the post type's REST response for the shadow term ID.
- *
- * @param string $post_type The post type.
- */
-function register_rest_fields( string $post_type ) {
-
-	// Register a field on each post type to provide a list of associated posts
-	// when the original post is in a non-published state.
-	register_rest_field(
-		$post_type,
-		'shadowTermPosts',
-		[
-			'get_callback' => __NAMESPACE__ . '\populate_associated_posts',
-		]
-	);
-
-	// Register a field on each post type to provide the post's corresponding
-	// shadow term ID when it is in a published state.
-	register_rest_field(
-		$post_type,
-		'shadowTermId',
-		[
-			'get_callback' => __NAMESPACE__ . '\populate_shadow_term_id',
-		]
-	);
-
-	// Register a field on each post type to provide its shadow taxonomy slug.
-	register_rest_field(
-		$post_type,
-		'shadowTermSlug',
-		[
-			'get_callback' => __NAMESPACE__ . '\populate_shadow_term_slug',
-		]
-	);
 }
 
 /**
