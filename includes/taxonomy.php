@@ -151,39 +151,3 @@ function handle_rest_associate( \WP_REST_Request $request ) : \WP_REST_Response 
 
 	return rest_ensure_response( [ 'posts' => $associated_posts->posts ] );
 }
-
-/**
- * Populate the post's associated posts as part of the REST response.
- *
- * @param array $post The post data as built for the response.
- * @return array A list of associated posts.
- */
-function populate_associated_posts( array $post ) : array {
-	$posts = get_post_meta( $post['id'], API\get_taxonomy_slug( $post['id'] ) . '_associated_posts', true );
-
-	if ( $posts ) {
-		return (array) $posts;
-	}
-
-	return [];
-}
-
-/**
- * Populate the post's shadow term ID as part of the REST response.
- *
- * @param array $post The post data as built for the response.
- * @return int The shadow term ID.
- */
-function populate_shadow_term_id( array $post ) : int {
-	return API\get_term_id( $post['id'] );
-}
-
-/**
- * Populate the post type's shadow taxonomy slug as part of the REST response.
- *
- * @param array $post The post data as built for the response.
- * @return string The shadow taxonomy slug.
- */
-function populate_shadow_term_slug( array $post ) : string {
-	return API\get_taxonomy_slug( $post['id'] );
-}
