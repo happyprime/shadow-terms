@@ -48,7 +48,7 @@ function get_term_id( int $post_id ) : int {
 		return 0;
 	}
 
-	$term = get_term_by( 'slug', $post->post_name, $taxonomy );
+	$term = get_term_by( 'name', $post->post_title, $taxonomy );
 
 	if ( ! $term ) {
 		return 0;
@@ -79,7 +79,7 @@ function get_post_id( int $term_id ) : int {
 	$query = new \WP_Query(
 		[
 			'post_type'              => $post_type,
-			'post_name'              => $term->slug,
+			'title'                  => $term->name,
 			'fields'                 => 'ids',
 			'no_found_rows'          => true,
 			'update_post_meta_cache' => false,
