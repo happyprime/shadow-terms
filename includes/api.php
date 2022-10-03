@@ -58,6 +58,43 @@ function get_term_id( int $post_id ) : int {
 }
 
 /**
+ * Retrieve a shadow term's associated post ID.
+ *
+ * @param int $term_id The shadow term ID.
+ * @return int The post ID.
+ */
+function get_post_id( int $term_id ) : int {
+	$term = get_term( $term_id );
+
+	if ( ! $term ) {
+		return 0;
+	}
+
+	$post_type = str_replace( '_connect', '', $term->taxonomy );
+
+	if ( ! post_type_exists( $post_type ) ) {
+		return 0;
+	}
+
+	$query = new \WP_Query(
+		[
+			'post_type'              => $post_type,
+			'post_name'              => $term->slug,
+			'fields'                 => 'ids',
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_term_meta_cache' => false,
+		]
+	);
+
+	if ( 1 === count( $query->posts ) ) {
+		return $query->posts[0];
+	}
+
+	return 0;
+}
+
+/**
  * Retrieve a list of associated posts stored when a post is
  * in a non-published state.
  *
