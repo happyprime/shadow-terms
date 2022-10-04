@@ -87,7 +87,7 @@ function get_post_id( int $term_id ) : int {
 		]
 	);
 
-	if ( 1 === count( $query->posts ) ) {
+	if ( 1 <= count( $query->posts ) ) {
 		return $query->posts[0];
 	}
 
