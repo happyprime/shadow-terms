@@ -2,7 +2,7 @@
 /**
  * Plugin Name:  Shadow Terms
  * Description:  Automatically create taxonomies for post types and use terms to associate related content.
- * Version:      0.0.1
+ * Version:      0.0.2
  * Plugin URI:   https://github.com/happyprime/shadow-terms/
  * Author:       Happy Prime
  * Author URI:   https://happyprime.co
