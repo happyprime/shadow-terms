@@ -134,3 +134,20 @@ function update_associated_posts( int $post_id, array $posts ) : void {
 
 	update_post_meta( $post_id, $taxonomy_slug . '_associated_posts', $posts );
 }
+
+/**
+ * Retrieve a list of post types that a shadow taxonomy supports.
+ *
+ * @param string $post_type The post type connected with the shadow taxonomy.
+ * @return string[] A list of post types that support assignment of terms in
+ *               the shadow taxonomy.
+ */
+function get_connected_post_types( string $post_type ) : array {
+	$supports = get_all_post_type_supports( $post_type );
+
+	if ( is_array( $supports['shadow-terms'] ) && is_array( $supports['shadow-terms'][0] ) ) {
+		return $supports['shadow-terms'][0];
+	}
+
+	return array();
+}
