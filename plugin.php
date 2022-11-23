@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:  Shadow Terms
- * Description:  Create taxonomies for post types and use terms to associate related content.
+ * Description:  Use terms from generated taxonomies to associate related content.
  * Version:      0.0.2
  * Plugin URI:   https://github.com/happyprime/shadow-terms/
  * Author:       Happy Prime

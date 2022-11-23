@@ -7,11 +7,11 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 Requires PHP: 7.4
 
-Automatically create taxonomies for post types and use terms to associate related content.
+Use terms from generated taxonomies to associate related content.
 
 ## Description
 
-Shadow Terms registers custom (shadow) taxonomies for supported post types so that other post types can be associated.
+Shadow Terms registers custom (shadow) taxonomies for supported post types. These taxonomies can be used to associate related content from a variety of post types.
 
 When a new post of a supported post type is created, a term mirroring that post is also created. When editing another post type that supports this taxonomy, this term can be assigned to associate the posts.
 
@@ -36,7 +36,7 @@ add_post_type_support(
 );
 ```
 
-With the example above, whenever an organization is created, a term with the same name will be created under the organization_connect taxonomy. When a person or press release is edited, that term will be available for assignment through standard WordPress taxonomy interfaces.
+With the example above, whenever an `organization` is created, a term with the same name will be created under the `organization_connect` taxonomy. When a person or press release is edited, that term will be available for assignment through standard WordPress taxonomy interfaces.
 
 Code can then be written to query and display all people or press releases related to an organization.
 
