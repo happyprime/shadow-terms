@@ -108,13 +108,13 @@ function get_associated_posts( int $post_id ) : array {
 
 	$posts = get_post_meta( $post_id, $taxonomy_slug . '_associated_posts', true );
 
-	if ( ! $posts ) {
+	if ( ! is_array( $posts ) ) {
 		return [];
 	}
 
 	$posts = array_map( 'intval', $posts );
 
-	return (array) $posts;
+	return $posts;
 }
 
 /**
