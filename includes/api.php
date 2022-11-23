@@ -72,7 +72,9 @@ function get_post_id( int $term_id ) : int {
 
 	$post_type = str_replace( '_connect', '', $term->taxonomy );
 
-	if ( ! post_type_exists( $post_type ) ) {
+	// If `_connect` was not part of the taxonomy or the taxonomy is
+	// not registered, there will be no associated post.
+	if ( $post_type === $term->taxonomy || ! post_type_exists( $post_type ) ) {
 		return 0;
 	}
 
@@ -87,11 +89,7 @@ function get_post_id( int $term_id ) : int {
 		]
 	);
 
-	if ( 1 <= count( $query->posts ) ) {
-		return $query->posts[0];
-	}
-
-	return 0;
+	return (int) array_pop( $query->posts );
 }
 
 /**
