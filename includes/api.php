@@ -10,6 +10,8 @@ namespace ShadowTerms\API;
 /**
  * Retrieve a post's shadow taxonomy slug.
  *
+ * @since 1.0.0
+ *
  * @param int $post_id The ID of the post.
  * @return string The shadow taxonomy slug. Empty if not found.
  */
@@ -31,6 +33,8 @@ function get_taxonomy_slug( int $post_id ) : string {
 
 /**
  * Retrieve a post's shadow term ID.
+ *
+ * @since 1.0.0
  *
  * @param int $post_id The post ID.
  * @return int The term ID. 0 if not available.
@@ -59,6 +63,8 @@ function get_term_id( int $post_id ) : int {
 
 /**
  * Retrieve a shadow term's associated post ID.
+ *
+ * @since 1.0.0
  *
  * @param int $term_id The shadow term ID.
  * @return int The post ID. 0 if not found.
@@ -94,6 +100,8 @@ function get_post_id( int $term_id ) : int {
 
 /**
  * Retrieve a list of post types that a shadow taxonomy supports.
+ *
+ * @since 1.0.0
  *
  * @param string $post_type The post type connected with the shadow taxonomy.
  * @return string[] A list of post types that support assignment of terms in

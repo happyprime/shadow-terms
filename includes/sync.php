@@ -14,6 +14,8 @@ add_action( 'deleted_post', __NAMESPACE__ . '\delete_term', 10, 2 );
  * Associate terms from registered "shadow" taxonomies with the titles of
  * published posts with support for those taxonomies.
  *
+ * @since 1.0.0
+ *
  * @param int           $post_id     The post ID.
  * @param \WP_Post      $post_after  The post object after the update.
  * @param bool          $update      Whether this is an update of an existing post.
@@ -90,6 +92,8 @@ function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $updat
 
 /**
  * Delete a post's shadow term when the post is deleted.
+ *
+ * @since 1.0.0
  *
  * @param int      $post_id The post ID.
  * @param \WP_Post $post    The post object.

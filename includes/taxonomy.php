@@ -19,6 +19,8 @@ add_action( 'rest_api_init', __NAMESPACE__ . '\register_route' );
  * catch all post types with registered support without going overboard. If a
  * post type registers itself after priority 9999, it should manually register
  * its shadow taxonomy with `ShadowTerms\Taxonomy\register_taxonomy()`.
+ *
+ * @since 1.0.0
  */
 function register() {
 	$post_types = get_post_types_by_support( 'shadow-terms' );
@@ -30,6 +32,8 @@ function register() {
 
 /**
  * Register Shadow Term REST routes.
+ *
+ * @since 1.0.0
  */
 function register_route() {
 	// Register a REST route used to associate posts with a post's shadow term.
@@ -46,6 +50,8 @@ function register_route() {
 
 /**
  * Register a single post type's shadow taxonomy.
+ *
+ * @since 1.0.0
  *
  * @param string $post_type The post type from which a shadow taxonomy should
  *                          be registered.
@@ -78,6 +84,8 @@ function register_taxonomy( string $post_type ) {
 /**
  * Determine whether the current user can associated shadow terms with posts.
  *
+ * @since 1.0.0
+ *
  * @return bool True if capable. False if not.
  */
 function can_associate_posts() : bool {
@@ -86,6 +94,8 @@ function can_associate_posts() : bool {
 
 /**
  * Handle the submission of a post association via REST request.
+ *
+ * @since 1.0.0
  *
  * @param \WP_REST_Request $request The vote submission request.
  * @return \WP_REST_Response The response data.
