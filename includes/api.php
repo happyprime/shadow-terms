@@ -93,47 +93,6 @@ function get_post_id( int $term_id ) : int {
 }
 
 /**
- * Retrieve a list of associated posts stored when a post is in a
- * non-published state.
- *
- * @param int $post_id The post ID.
- * @return array A list of associated posts.
- */
-function get_associated_posts( int $post_id ) : array {
-	$taxonomy_slug = get_taxonomy_slug( $post_id );
-
-	if ( '' === $taxonomy_slug ) {
-		return [];
-	}
-
-	$posts = get_post_meta( $post_id, $taxonomy_slug . '_associated_posts', true );
-
-	if ( ! is_array( $posts ) ) {
-		return [];
-	}
-
-	$posts = array_map( 'intval', $posts );
-
-	return $posts;
-}
-
-/**
- * Update a list of a post's associated posts.
- *
- * @param int        $post_id The original post.
- * @param array[int] $posts   A list of associated post IDs.
- */
-function update_associated_posts( int $post_id, array $posts ) : void {
-	$taxonomy_slug = get_taxonomy_slug( $post_id );
-
-	if ( '' === $taxonomy_slug ) {
-		return;
-	}
-
-	update_post_meta( $post_id, $taxonomy_slug . '_associated_posts', $posts );
-}
-
-/**
  * Retrieve a list of post types that a shadow taxonomy supports.
  *
  * @param string $post_type The post type connected with the shadow taxonomy.
