@@ -110,22 +110,6 @@ function get_associated_posts( int $post_id ) : array {
 }
 
 /**
- * Update a list of a post's associated posts.
- *
- * @param int        $post_id The original post.
- * @param array[int] $posts   A list of associated post IDs.
- */
-function update_associated_posts( int $post_id, array $posts ) : void {
-	$taxonomy_slug = API\get_taxonomy_slug( $post_id );
-
-	if ( '' === $taxonomy_slug ) {
-		return;
-	}
-
-	update_post_meta( $post_id, $taxonomy_slug . '_associated_posts', $posts );
-}
-
-/**
  * Handle the submission of a post association via REST request.
  *
  * @param \WP_REST_Request $request The vote submission request.
@@ -134,8 +118,9 @@ function update_associated_posts( int $post_id, array $posts ) : void {
 function handle_rest_associate( \WP_REST_Request $request ) : \WP_REST_Response {
 	$post_id            = (int) $request->get_param( 'postId' );
 	$associated_post_id = (int) $request->get_param( 'associatedPostId' );
+	$taxonomy_slug      = API\get_taxonomy_slug( $post_id );
 
-	if ( ! API\get_taxonomy_slug( $post_id ) ) {
+	if ( ! $taxonomy_slug ) {
 		return rest_ensure_response(
 			[
 				'success' => false,
@@ -152,7 +137,7 @@ function handle_rest_associate( \WP_REST_Request $request ) : \WP_REST_Response 
 
 		if ( ! in_array( $associated_post_id, $associated_posts, true ) ) {
 			$associated_posts[] = $associated_post_id;
-			update_associated_posts( $post_id, $associated_posts );
+			update_post_meta( $post_id, $taxonomy_slug . '_associated_posts', $associated_posts );
 		}
 
 		return rest_ensure_response(
