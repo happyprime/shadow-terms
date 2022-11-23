@@ -10,6 +10,8 @@ namespace ShadowTerms\API;
 /**
  * Retrieve a post's shadow taxonomy slug.
  *
+ * @since 1.0.0
+ *
  * @param int $post_id The ID of the post.
  * @return string The shadow taxonomy slug. Empty if not found.
  */
@@ -31,6 +33,8 @@ function get_taxonomy_slug( int $post_id ) : string {
 
 /**
  * Retrieve a post's shadow term ID.
+ *
+ * @since 1.0.0
  *
  * @param int $post_id The post ID.
  * @return int The term ID. 0 if not available.
@@ -60,8 +64,10 @@ function get_term_id( int $post_id ) : int {
 /**
  * Retrieve a shadow term's associated post ID.
  *
+ * @since 1.0.0
+ *
  * @param int $term_id The shadow term ID.
- * @return int The post ID.
+ * @return int The post ID. 0 if not found.
  */
 function get_post_id( int $term_id ) : int {
 	$term = get_term( $term_id );
@@ -72,7 +78,9 @@ function get_post_id( int $term_id ) : int {
 
 	$post_type = str_replace( '_connect', '', $term->taxonomy );
 
-	if ( ! post_type_exists( $post_type ) ) {
+	// If `_connect` was not part of the taxonomy or the taxonomy is
+	// not registered, there will be no associated post.
+	if ( $post_type === $term->taxonomy || ! post_type_exists( $post_type ) ) {
 		return 0;
 	}
 
@@ -87,50 +95,24 @@ function get_post_id( int $term_id ) : int {
 		]
 	);
 
-	if ( 1 <= count( $query->posts ) ) {
-		return $query->posts[0];
-	}
-
-	return 0;
+	return (int) array_pop( $query->posts );
 }
 
 /**
- * Retrieve a list of associated posts stored when a post is
- * in a non-published state.
+ * Retrieve a list of post types that a shadow taxonomy supports.
  *
- * @param int $post_id The post ID.
- * @return array A list of associated posts.
- */
-function get_associated_posts( int $post_id ) : array {
-	$taxonomy_slug = get_taxonomy_slug( $post_id );
-
-	if ( '' === $taxonomy_slug ) {
-		return [];
-	}
-
-	$posts = get_post_meta( $post_id, $taxonomy_slug . '_associated_posts', true );
-
-	if ( ! $posts ) {
-		return [];
-	}
-
-	$posts = array_map( 'intval', $posts );
-
-	return (array) $posts;
-}
-
-/**
- * Update a list of a post's associated posts.
+ * @since 1.0.0
  *
- * @param int        $post_id The original post.
- * @param array[int] $posts   A list of associated post IDs.
+ * @param string $post_type The post type connected with the shadow taxonomy.
+ * @return string[] A list of post types that support assignment of terms in
+ *               the shadow taxonomy.
  */
-function update_associated_posts( int $post_id, array $posts ) : void {
-	$taxonomy_slug = get_taxonomy_slug( $post_id );
+function get_connected_post_types( string $post_type ) : array {
+	$supports = get_all_post_type_supports( $post_type );
 
-	if ( '' === $taxonomy_slug ) {
-		return;
+	if ( is_array( $supports['shadow-terms'] ) && is_array( $supports['shadow-terms'][0] ) ) {
+		return $supports['shadow-terms'][0];
 	}
 
-	update_post_meta( $post_id, $taxonomy_slug . '_associated_posts', $posts );
+	return array();
 }

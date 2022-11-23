@@ -1,44 +1,40 @@
 # Shadow Terms
 
+Use terms from generated taxonomies to associate related content.
+
 ## Description
 
-Automatically create taxonomies for post types and use terms to associate related content.
+Shadow Terms registers custom (shadow) taxonomies for supported post types. These taxonomies can be used to associate related content from a variety of post types.
 
-## Usage
+When a new post of a supported post type is created, a term mirroring that post is also created. When editing another post type that supports this taxonomy, this term can be assigned to associate the posts.
 
-* First, add a shadow taxonomy by adding support to a post type. Here, we're creating a post type called Example. Every time an Example post is published, it will automatically generate a Shadow Term in the `example_connect` taxonomy.
+Shadow Terms does not register support for itself on any post types by default. Custom code must be added to a plugin or theme.
 
-```
+Support can be added to a custom post type with code like:
+
+```php
 <?php
-// Add 'shadow-terms' to your 'supports' array.
-$args = array(
-	'supports' => array( 'title', 'editor', 'thumbnail', 'revisions', 'shadow-terms' ),
+// Register the organization post type normally.
+register_post_type( 'organization', $args );
+
+// Add support for Shadow Terms to the organization post type.
+add_post_type_support(
+	'organization',
+	'shadow-terms',
+	array(
+		// Add post types that support the organization_connect taxonomy.
+		'person',
+		'press-release',
+	)
 );
-register_post_type( 'example', $args );
-?>
 ```
 
-* Then, enable the new taxonomy on other post types. Here, we're enabling Shadow Terms on the default Post and Page post types.
+With the example above, whenever an `organization` is created, a term with the same name will be created under the `organization_connect` taxonomy. When a person or press release is edited, that term will be available for assignment through standard WordPress taxonomy interfaces.
 
-```
-<?php
-add_post_type_support( 'example', 'shadow-terms', array( 'post', 'page' ) );
-?>
-```
-
-* Now, you can add a few Example posts. Once those are published, edit a Post or Page, and you'll be able to select any of the Example post titles to link your Post or Page to the Example.
-
-## Installation
-
-1. Upload `shadow-terms.zip` to the `/wp-content/plugins/` directory.
-2. Activate the plugin through WordPress's 'Plugins' menu.
+Code can then be written to query and display all people or press releases related to an organization.
 
 ## Changelog
 
-### 0.0.2
+### 1.0.0
 
-* Added usage instructions.
-
-### 0.0.1
-
-* Initial release.
+Initial release.
