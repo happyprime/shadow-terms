@@ -76,7 +76,7 @@ function register_taxonomy( string $post_type ) {
 }
 
 /**
- * Determine whether a user can associated shadow terms with posts.
+ * Determine whether the current user can associated shadow terms with posts.
  *
  * @return bool True if capable. False if not.
  */
