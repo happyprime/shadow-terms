@@ -22,7 +22,7 @@ add_action( 'rest_api_init', __NAMESPACE__ . '\register_route' );
  *
  * @since 1.0.0
  */
-function register() {
+function register() : void {
 	$post_types = get_post_types_by_support( 'shadow-terms' );
 
 	foreach ( $post_types as $post_type ) {
@@ -35,7 +35,7 @@ function register() {
  *
  * @since 1.0.0
  */
-function register_route() {
+function register_route() : void {
 	// Register a REST route used to associate posts with a post's shadow term.
 	register_rest_route(
 		'shadow-terms/v1',
@@ -56,7 +56,7 @@ function register_route() {
  * @param string $post_type The post type from which a shadow taxonomy should
  *                          be registered.
  */
-function register_taxonomy( string $post_type ) {
+function register_taxonomy( string $post_type ) : void {
 	$post_type_object = get_post_type_object( $post_type );
 
 	$args = array(
