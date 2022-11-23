@@ -85,31 +85,6 @@ function can_associate_posts() : bool {
 }
 
 /**
- * Retrieve a list of associated posts stored when a post is in a
- * non-published state.
- *
- * @param int $post_id The post ID.
- * @return array A list of associated posts.
- */
-function get_associated_posts( int $post_id ) : array {
-	$taxonomy_slug = API\get_taxonomy_slug( $post_id );
-
-	if ( '' === $taxonomy_slug ) {
-		return [];
-	}
-
-	$posts = get_post_meta( $post_id, $taxonomy_slug . '_associated_posts', true );
-
-	if ( ! is_array( $posts ) ) {
-		return [];
-	}
-
-	$posts = array_map( 'intval', $posts );
-
-	return $posts;
-}
-
-/**
  * Handle the submission of a post association via REST request.
  *
  * @param \WP_REST_Request $request The vote submission request.
@@ -133,7 +108,13 @@ function handle_rest_associate( \WP_REST_Request $request ) : \WP_REST_Response 
 	$post = get_post( $post_id );
 
 	if ( 'publish' !== $post->post_status ) {
-		$associated_posts = get_associated_posts( $post_id );
+		$associated_posts = get_post_meta( $post_id, $taxonomy_slug . '_associated_posts', true );
+
+		if ( ! is_array( $associated_posts ) ) {
+			$associated_posts = [];
+		}
+
+		$associated_posts = array_map( 'intval', $associated_posts );
 
 		if ( ! in_array( $associated_post_id, $associated_posts, true ) ) {
 			$associated_posts[] = $associated_post_id;
