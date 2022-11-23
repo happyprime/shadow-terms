@@ -61,7 +61,7 @@ function get_term_id( int $post_id ) : int {
  * Retrieve a shadow term's associated post ID.
  *
  * @param int $term_id The shadow term ID.
- * @return int The post ID.
+ * @return int The post ID. 0 if not found.
  */
 function get_post_id( int $term_id ) : int {
 	$term = get_term( $term_id );
@@ -93,8 +93,8 @@ function get_post_id( int $term_id ) : int {
 }
 
 /**
- * Retrieve a list of associated posts stored when a post is
- * in a non-published state.
+ * Retrieve a list of associated posts stored when a post is in a
+ * non-published state.
  *
  * @param int $post_id The post ID.
  * @return array A list of associated posts.
