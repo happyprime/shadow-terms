@@ -14,6 +14,11 @@ add_action( 'rest_api_init', __NAMESPACE__ . '\register_route' );
 
 /**
  * Register all shadow taxonomies.
+ *
+ * Registration fires at priority 9999 so that we have the best opportunity to
+ * catch all post types with registered support without going overboard. If a
+ * post type registers itself after priority 9999, it should manually register
+ * its shadow taxonomy with `ShadowTerms\Taxonomy\register_taxonomy()`.
  */
 function register() {
 	$post_types = get_post_types_by_support( 'shadow-terms' );
