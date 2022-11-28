@@ -19,22 +19,20 @@ Shadow Terms does not register support for itself on any post types by default. 
 
 Support can be added to a custom post type with code like:
 
-```
-<?php
-// Register the organization post type normally.
-register_post_type( 'organization', $args );
+	<?php
+	// Register the organization post type normally.
+	register_post_type( 'organization', $args );
 
-// Add support for Shadow Terms to the organization post type.
-add_post_type_support(
-	'organization',
-	'shadow-terms',
-	array(
-		// Add post types that support the organization_connect taxonomy.
-		'person',
-		'press-release',
-	)
-);
-```
+	// Add support for Shadow Terms to the organization post type.
+	add_post_type_support(
+		'organization',
+		'shadow-terms',
+		array(
+			// Add post types that support the organization_connect taxonomy.
+			'person',
+			'press-release',
+		)
+	);
 
 With the example above, whenever an `organization` is created, a term with the same name will be created under the `organization_connect` taxonomy. When a person or press release is edited, that term will be available for assignment through standard WordPress taxonomy interfaces.
 
