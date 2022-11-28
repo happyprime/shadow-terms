@@ -3,6 +3,7 @@ bin/
 tests/
 vendor/
 .distignore
+.git
 .gitignore
 .phpcs.xml.dist
 .phpunit.result.cache
