@@ -7,6 +7,7 @@ vendor/
 .gitignore
 .phpcs.xml.dist
 .phpunit.result.cache
+.wordpress-org/
 composer.json
 composer.lock
 phpunit.xml.dist
