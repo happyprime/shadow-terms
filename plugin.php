@@ -2,7 +2,7 @@
 /**
  * Plugin Name:  Shadow Terms
  * Description:  Use terms from generated taxonomies to associate related content.
- * Version:      1.0.0
+ * Version:      1.0.1
  * Plugin URI:   https://github.com/happyprime/shadow-terms/
  * Author:       Happy Prime
  * Author URI:   https://happyprime.co

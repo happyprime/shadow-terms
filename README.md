@@ -35,6 +35,10 @@ Code can then be written to query and display all people or press releases relat
 
 ## Changelog
 
+### 1.0.1
+
+* Fix: Ensure term and post slugs sync properly on post update.
+
 ### 1.0.0
 
 Initial release.
