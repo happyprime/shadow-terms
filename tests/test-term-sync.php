@@ -386,4 +386,74 @@ class TestTermSync extends WP_UnitTestCase {
 
 		$this->assertEquals( array( $term->slug ), $associated_terms, 'Existing shadow term relationships should be restored when its connected post is moved from trash to publish.' );
 	}
+
+	/**
+	 * An existing published post that has its title changed should change the
+	 * title of its shadow term.
+	 */
+	public function test_post_publish_to_publish_modified_title_updates_term() {
+		$post = $this->factory->post->create(
+			array(
+				'post_type'   => 'example',
+				'post_title'  => 'Garbanzo Bean',
+				'post_status' => 'publish',
+			)
+		);
+		$post = get_post( $post );
+
+		$post->post_title = 'Chickpea';
+		wp_update_post( $post );
+
+		$term      = get_term_by( 'slug', 'garbanzo-bean', 'example_connect', OBJECT );
+		$term_name = ! $term ? '' : $term->name;
+
+		$this->assertEquals( 'Chickpea', $term_name, 'A connected term slug should update when a post title is updated.' );
+	}
+
+	/**
+	 * An existing published post that has its slug changed should change the
+	 * slug of its shadow term.
+	 */
+	public function test_post_publish_to_publish_modified_slug_updates_term() {
+		$post = $this->factory->post->create(
+			array(
+				'post_type'   => 'example',
+				'post_title'  => 'Garbanzo Bean',
+				'post_status' => 'publish',
+			)
+		);
+		$post = get_post( $post );
+
+		$post->post_name = 'chickpea';
+		wp_update_post( $post );
+
+		$term      = get_term_by( 'slug', 'chickpea', 'example_connect', OBJECT );
+		$term_name = ! $term ? '' : $term->name;
+
+		$this->assertEquals( 'Garbanzo Bean', $term_name, 'A connected term slug should update when a post slug is updated.' );
+	}
+
+	/**
+	 * An existing published post that has its title changed should change the
+	 * title of its shadow term.
+	 */
+	public function test_post_publish_to_publish_modified_title_and_slug_updates_term() {
+		$post = $this->factory->post->create(
+			array(
+				'post_type'   => 'example',
+				'post_title'  => 'Garbanzo Bean',
+				'post_status' => 'publish',
+			)
+		);
+		$post = get_post( $post );
+
+		$post->post_title = 'Chickpea';
+		$post->post_name  = 'chickpea';
+		wp_update_post( $post );
+
+		$term      = get_term_by( 'slug', 'chickpea', 'example_connect', OBJECT );
+		$term_name = ! $term ? '' : $term->name;
+
+		$this->assertEquals( 'Chickpea', $term_name, 'A connected term slug should update when its post title and slug is updated.' );
+	}
 }

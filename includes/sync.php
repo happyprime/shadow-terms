@@ -28,6 +28,8 @@ function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $updat
 	$status_after  = $post_after->post_status;
 	$title_before  = null === $post_before ? '' : $post_before->post_title;
 	$title_after   = $post_after->post_title;
+	$slug_before   = null === $post_before ? '' : $post_before->post_name;
+	$slug_after    = $post_after->post_name;
 
 	// One version of the post must be published for us to make a change.
 	if ( ! in_array( 'publish', array( $status_before, $status_after ), true ) ) {
@@ -65,14 +67,17 @@ function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $updat
 		return;
 	}
 
-	// If a post is to remain published, but the title has changed, update the term.
-	if ( $term_before && 'publish' === $post_after->post_status && $title_before !== $title_after ) {
+	$changed = $title_before !== $title_after;
+	$changed = $changed || ( $slug_before !== $slug_after );
+
+	// If a post is to remain published, but the title or slug has changed, update the term.
+	if ( $term_before && 'publish' === $post_after->post_status && $changed ) {
 		wp_update_term(
 			$term_before->term_id,
 			$taxonomy,
 			array(
 				'name' => $title_after,
-				'slug' => sanitize_title( $title_after ),
+				'slug' => $slug_after,
 			)
 		);
 
