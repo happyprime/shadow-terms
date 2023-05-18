@@ -404,10 +404,12 @@ class TestTermSync extends WP_UnitTestCase {
 		$post->post_title = 'Chickpea';
 		wp_update_post( $post );
 
+		// A term should exist for the original slug.
 		$term      = get_term_by( 'slug', 'garbanzo-bean', 'example_connect', OBJECT );
 		$term_name = ! $term ? '' : $term->name;
 
-		$this->assertEquals( 'Chickpea', $term_name, 'A connected term slug should update when a post title is updated.' );
+		// And that term's name should match the updated post title.
+		$this->assertEquals( 'Chickpea', $term_name, 'A connected term name should update when a post title is updated, but the term slug should remain the same.' );
 	}
 
 	/**
@@ -427,9 +429,11 @@ class TestTermSync extends WP_UnitTestCase {
 		$post->post_name = 'chickpea';
 		wp_update_post( $post );
 
+		// A term should exist for the new slug.
 		$term      = get_term_by( 'slug', 'chickpea', 'example_connect', OBJECT );
 		$term_name = ! $term ? '' : $term->name;
 
+		// And that term's name should still match the unmodified post title.
 		$this->assertEquals( 'Garbanzo Bean', $term_name, 'A connected term slug should update when a post slug is updated.' );
 	}
 
@@ -451,9 +455,11 @@ class TestTermSync extends WP_UnitTestCase {
 		$post->post_name  = 'chickpea';
 		wp_update_post( $post );
 
+		// A term should exist for the new slug.
 		$term      = get_term_by( 'slug', 'chickpea', 'example_connect', OBJECT );
 		$term_name = ! $term ? '' : $term->name;
 
-		$this->assertEquals( 'Chickpea', $term_name, 'A connected term slug should update when its post title and slug is updated.' );
+		// And that term's name should match the updated post's title.
+		$this->assertEquals( 'Chickpea', $term_name, 'A connected term slug and term name should update when its post title and slug is updated.' );
 	}
 }
