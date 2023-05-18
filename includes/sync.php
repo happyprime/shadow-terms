@@ -67,8 +67,7 @@ function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $updat
 		return;
 	}
 
-	$changed = $title_before !== $title_after;
-	$changed = $changed || ( $slug_before !== $slug_after );
+	$changed = $title_before !== $title_after || $slug_before !== $slug_after;
 
 	// If a post is to remain published, but the title or slug has changed, update the term.
 	if ( $term_before && 'publish' === $post_after->post_status && $changed ) {
