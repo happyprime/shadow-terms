@@ -71,9 +71,7 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: |
-          composer update
-          composer install --no-interaction --no-scripts
+        run: composer install --no-interaction --no-scripts
 
       - name: Run tests
         run: composer phpunit
