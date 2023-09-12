@@ -31,11 +31,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4', '8.0', '8.1']
+        php: ['7.4', '8.0', '8.2']
         wordpress: ['latest']
         experimental: [false]
         include:
-          - php: '8.2'
+          - php: '8.3'
             wordpress: 'trunk'
             experimental: true
 
