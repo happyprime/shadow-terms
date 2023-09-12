@@ -21,7 +21,7 @@ add_action( 'deleted_post', __NAMESPACE__ . '\delete_term', 10, 2 );
  * @param bool          $update      Whether this is an update of an existing post.
  * @param null|\WP_Post $post_before The post object before the update.
  */
-function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $update, $post_before ) : void {
+function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $update, $post_before ): void {
 	// The post before object may be null for new posts, so juggle that
 	// possibility to capture status and title before doing anything else.
 	$status_before = null === $post_before ? '' : $post_before->post_status;
@@ -102,7 +102,7 @@ function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $updat
  * @param int      $post_id The post ID.
  * @param \WP_Post $post    The post object.
  */
-function delete_term( int $post_id, \WP_Post $post ) : void {
+function delete_term( int $post_id, \WP_Post $post ): void {
 	if ( ! post_type_supports( $post->post_type, 'shadow-terms' ) ) {
 		return;
 	}

@@ -15,7 +15,7 @@ namespace ShadowTerms\API;
  * @param int $post_id The ID of the post.
  * @return string The shadow taxonomy slug. Empty if not found.
  */
-function get_taxonomy_slug( int $post_id ) : string {
+function get_taxonomy_slug( int $post_id ): string {
 	$post = get_post( $post_id );
 
 	if ( ! $post ) {
@@ -39,7 +39,7 @@ function get_taxonomy_slug( int $post_id ) : string {
  * @param int $post_id The post ID.
  * @return int The term ID. 0 if not available.
  */
-function get_term_id( int $post_id ) : int {
+function get_term_id( int $post_id ): int {
 	$post = get_post( $post_id );
 
 	if ( ! $post ) {
@@ -69,7 +69,7 @@ function get_term_id( int $post_id ) : int {
  * @param int $term_id The shadow term ID.
  * @return int The post ID. 0 if not found.
  */
-function get_post_id( int $term_id ) : int {
+function get_post_id( int $term_id ): int {
 	$term = get_term( $term_id );
 
 	if ( ! $term ) {
@@ -107,7 +107,7 @@ function get_post_id( int $term_id ) : int {
  * @return string[] A list of post types that support assignment of terms in
  *               the shadow taxonomy.
  */
-function get_connected_post_types( string $post_type ) : array {
+function get_connected_post_types( string $post_type ): array {
 	$supports = get_all_post_type_supports( $post_type );
 
 	if ( is_array( $supports['shadow-terms'] ) && is_array( $supports['shadow-terms'][0] ) ) {

@@ -22,7 +22,7 @@ add_action( 'rest_api_init', __NAMESPACE__ . '\register_route' );
  *
  * @since 1.0.0
  */
-function register() : void {
+function register(): void {
 	$post_types = get_post_types_by_support( 'shadow-terms' );
 
 	foreach ( $post_types as $post_type ) {
@@ -35,7 +35,7 @@ function register() : void {
  *
  * @since 1.0.0
  */
-function register_route() : void {
+function register_route(): void {
 	// Register a REST route used to associate posts with a post's shadow term.
 	register_rest_route(
 		'shadow-terms/v1',
@@ -56,7 +56,7 @@ function register_route() : void {
  * @param string $post_type The post type from which a shadow taxonomy should
  *                          be registered.
  */
-function register_taxonomy( string $post_type ) : void {
+function register_taxonomy( string $post_type ): void {
 	$post_type_object = get_post_type_object( $post_type );
 
 	$args = array(
@@ -98,7 +98,7 @@ function register_taxonomy( string $post_type ) : void {
  *
  * @return bool True if capable. False if not.
  */
-function can_associate_posts() : bool {
+function can_associate_posts(): bool {
 	return current_user_can( 'edit_posts' );
 }
 
@@ -110,7 +110,7 @@ function can_associate_posts() : bool {
  * @param \WP_REST_Request $request The vote submission request.
  * @return \WP_REST_Response The response data.
  */
-function handle_rest_associate( \WP_REST_Request $request ) : \WP_REST_Response {
+function handle_rest_associate( \WP_REST_Request $request ): \WP_REST_Response {
 	$post_id            = (int) $request->get_param( 'postId' );
 	$associated_post_id = (int) $request->get_param( 'associatedPostId' );
 	$taxonomy_slug      = API\get_taxonomy_slug( $post_id );
