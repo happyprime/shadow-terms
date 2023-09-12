@@ -102,7 +102,7 @@ function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $updat
  * @param int      $post_id The post ID.
  * @param \WP_Post $post    The post object.
  */
-function delete_term( int $post_id, \WP_Post $post ): void {
+function delete_term( $post_id, \WP_Post $post ): void {
 	if ( ! post_type_supports( $post->post_type, 'shadow-terms' ) ) {
 		return;
 	}
