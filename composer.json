@@ -3,12 +3,12 @@
 	"type": "wordpress-plugin",
 	"minimum-stability": "stable",
 	"require-dev": {
-		"wp-coding-standards/wpcs": "^2.0",
-		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-		"phpcompatibility/php-compatibility": "^9.3",
+		"wp-coding-standards/wpcs": "^3.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1",
+		"phpcompatibility/php-compatibility": "dev-develop as 9.99.99",
 		"phpcompatibility/phpcompatibility-wp": "*",
 		"phpunit/phpunit": "^5 || ^7 || ^8 || ^9",
-		"yoast/phpunit-polyfills": "^1.0"
+		"yoast/phpunit-polyfills": "^2"
 	},
 	"scripts": {
 		"phpcs": "vendor/bin/phpcs",
