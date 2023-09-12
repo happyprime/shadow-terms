@@ -41,7 +41,7 @@
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array"/>
+			<property name="text_domain" type="array">
 				<!-- Value: replace the text domain used. -->
 				<element value="shadow-terms"/>
 			</property>
