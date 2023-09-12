@@ -30,14 +30,21 @@
 	<rule ref="WordPress-Docs" />
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<!-- Value: replace the function, class, and variable prefixes used. Separate multiple prefixes with a comma. -->
-			<property name="prefixes" type="array" value="ShadowTerms,shadow_terms"/>
+			<property name="prefixes" type="array">
+				<!-- Value: replace the function, class, and variable prefixes used. -->
+				<element value="ShadowTerms"/>
+				<element value="shadow_terms"/>
+			</property>
 		</properties>
 	</rule>
+
+
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<!-- Value: replace the text domain used. -->
-			<property name="text_domain" type="array" value="shadow-terms"/>
+			<property name="text_domain" type="array"/>
+				<!-- Value: replace the text domain used. -->
+				<element value="shadow-terms"/>
+			</property>
 		</properties>
 	</rule>
 	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
