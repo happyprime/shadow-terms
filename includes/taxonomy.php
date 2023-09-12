@@ -74,6 +74,16 @@ function register_taxonomy( string $post_type ): void {
 		'show_admin_column'  => true,
 	);
 
+	/**
+	 * Filter the arguments used to register a shadow taxonomy.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @param array  $args      The arguments used to register the taxonomy.
+	 * @param string $post_type The post type this taxonomy is shadowing.
+	 */
+	$args = apply_filters( 'shadow_terms_register_taxonomy_args', $args, $post_type );
+
 	\register_taxonomy(
 		$post_type . '_connect',
 		API\get_connected_post_types( $post_type ),
