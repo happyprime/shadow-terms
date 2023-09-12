@@ -47,7 +47,7 @@
 	</rule>
 
 	<!-- WordPress should allow short array syntax. -->
-	<rule ref="Generic.Arrays.DisallowShortArraySyntax">
-		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+	<rule ref="Universal.Arrays.DisallowShortArraySyntax.Found">
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
 	</rule>
 </ruleset>

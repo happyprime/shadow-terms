@@ -76,7 +76,7 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
-	require dirname( dirname( __FILE__ ) ) . '/plugin.php';
+	require dirname( __DIR__ ) . '/plugin.php';
 }
 
 // Start up the WP testing environment.
