@@ -38,7 +38,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer config github-oauth.github.com ${{ secrets.AMIABOT_BOT_TOKEN }}
           composer install --prefer-dist --no-progress
 
       - name: Detect coding standard violations
