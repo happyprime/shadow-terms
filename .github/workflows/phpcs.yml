@@ -3,6 +3,14 @@ name: PHPCS (Default, PHP 8.2)
 
 on: pull_request
 
+# The GITHUB_TOKEN used by Dependabot has read-only permissions
+# by default, so we provide write permissions to this workflow
+# so that comments can be left on the pull request.
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions#changing-github_token-permissions
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   phpcs:
     runs-on: ubuntu-latest
