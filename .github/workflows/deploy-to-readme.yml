@@ -10,7 +10,7 @@ jobs:
             - uses: actions/checkout@master
             - run: mkdir -p .wordpress-org
             - name: WordPress.org plugin asset/readme update
-              uses: 10up/action-wordpress-plugin-asset-update@2.1.2
+              uses: 10up/action-wordpress-plugin-asset-update@2.1.3
               env:
                   SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
                   SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
