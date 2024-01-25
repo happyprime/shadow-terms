@@ -3,7 +3,7 @@
 	"type": "wordpress-plugin",
 	"minimum-stability": "stable",
 	"require-dev": {
-		"happyprime/coding-standards": "^0.0.2",
+		"happyprime/coding-standards": "^0.0.3",
 		"phpcompatibility/php-compatibility": "dev-develop as 9.99.99"
 	},
 	"scripts": {

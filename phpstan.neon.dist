@@ -3,5 +3,3 @@ includes:
 
 parameters:
   level: 5
-  excludePaths:
-    - tests/*
