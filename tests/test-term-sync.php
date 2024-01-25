@@ -24,7 +24,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 
-		$term      = get_term_by( 'slug', 'apple', 'example_connect', OBJECT );
+		$term      = get_term_by( 'slug', 'apple', 'example_connect', 'OBJECT' );
 		$term_name = ! $term ? '' : $term->name;
 
 		$this->assertEquals( 'Apple', $term_name, 'A newly created post with an initial status of publish should generate a shadow term.' );
@@ -46,7 +46,7 @@ class TestTermSync extends WP_UnitTestCase {
 		$post->post_status = 'publish';
 		wp_update_post( $post );
 
-		$term      = get_term_by( 'slug', 'bean', 'example_connect', OBJECT );
+		$term      = get_term_by( 'slug', 'bean', 'example_connect', 'OBJECT' );
 		$term_name = ! $term ? '' : $term->name;
 
 		$this->assertEquals( 'Bean', $term_name, 'An existing draft post that is published should generate a shadow term.' );
@@ -64,7 +64,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'corn', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'corn', 'example_connect', 'OBJECT' );
 
 		wp_delete_post( $post->ID, true );
 
@@ -85,7 +85,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'daikon', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'daikon', 'example_connect', 'OBJECT' );
 
 		$post->post_status = 'draft';
 		wp_update_post( $post );
@@ -107,7 +107,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'zebra', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'zebra', 'example_connect', 'OBJECT' );
 
 		$associated_post = $this->factory->post->create(
 			array(
@@ -139,7 +139,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'elderberry', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'elderberry', 'example_connect', 'OBJECT' );
 
 		$post->post_status = 'pending';
 		wp_update_post( $post );
@@ -161,7 +161,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'yellow', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'yellow', 'example_connect', 'OBJECT' );
 
 		$associated_post = $this->factory->post->create(
 			array(
@@ -193,7 +193,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'xylophone', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'xylophone', 'example_connect', 'OBJECT' );
 
 		$post->post_status = 'private';
 		wp_update_post( $post );
@@ -215,7 +215,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'french-fry', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'french-fry', 'example_connect', 'OBJECT' );
 
 		$associated_post = $this->factory->post->create(
 			array(
@@ -247,7 +247,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'wrapper', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'wrapper', 'example_connect', 'OBJECT' );
 
 		$associated_post = $this->factory->post->create(
 			array(
@@ -285,7 +285,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'viola', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'viola', 'example_connect', 'OBJECT' );
 
 		$associated_post = $this->factory->post->create(
 			array(
@@ -323,7 +323,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'umbrella', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'umbrella', 'example_connect', 'OBJECT' );
 
 		$associated_post = $this->factory->post->create(
 			array(
@@ -361,7 +361,7 @@ class TestTermSync extends WP_UnitTestCase {
 			)
 		);
 		$post = get_post( $post );
-		$term = get_term_by( 'slug', 'tasty', 'example_connect', OBJECT );
+		$term = get_term_by( 'slug', 'tasty', 'example_connect', 'OBJECT' );
 
 		$associated_post = $this->factory->post->create(
 			array(
@@ -405,7 +405,7 @@ class TestTermSync extends WP_UnitTestCase {
 		wp_update_post( $post );
 
 		// A term should exist for the original slug.
-		$term      = get_term_by( 'slug', 'garbanzo-bean', 'example_connect', OBJECT );
+		$term      = get_term_by( 'slug', 'garbanzo-bean', 'example_connect', 'OBJECT' );
 		$term_name = ! $term ? '' : $term->name;
 
 		// And that term's name should match the updated post title.
@@ -430,7 +430,7 @@ class TestTermSync extends WP_UnitTestCase {
 		wp_update_post( $post );
 
 		// A term should exist for the new slug.
-		$term      = get_term_by( 'slug', 'chickpea', 'example_connect', OBJECT );
+		$term      = get_term_by( 'slug', 'chickpea', 'example_connect', 'OBJECT' );
 		$term_name = ! $term ? '' : $term->name;
 
 		// And that term's name should still match the unmodified post title.
@@ -456,7 +456,7 @@ class TestTermSync extends WP_UnitTestCase {
 		wp_update_post( $post );
 
 		// A term should exist for the new slug.
-		$term      = get_term_by( 'slug', 'chickpea', 'example_connect', OBJECT );
+		$term      = get_term_by( 'slug', 'chickpea', 'example_connect', 'OBJECT' );
 		$term_name = ! $term ? '' : $term->name;
 
 		// And that term's name should match the updated post's title.
