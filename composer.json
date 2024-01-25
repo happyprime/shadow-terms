@@ -3,22 +3,23 @@
 	"type": "wordpress-plugin",
 	"minimum-stability": "stable",
 	"require-dev": {
-		"wp-coding-standards/wpcs": "^3.0",
-		"dealerdirect/phpcodesniffer-composer-installer": "^1",
-		"phpcompatibility/php-compatibility": "dev-develop as 9.99.99",
-		"phpcompatibility/phpcompatibility-wp": "*",
-		"phpunit/phpunit": "^5 || ^7 || ^8 || ^9",
-		"yoast/phpunit-polyfills": "^2"
+		"happyprime/coding-standards": "^0.0.3",
+		"phpcompatibility/php-compatibility": "dev-develop as 9.99.99"
 	},
 	"scripts": {
 		"phpcs": "vendor/bin/phpcs",
 		"phpcbf": "vendor/bin/phpcbf",
-		"phpunit": "vendor/bin/phpunit"
+		"phpunit": "vendor/bin/phpunit",
+		"phpstan": "vendor/bin/phpstan analyse --memory-limit=2048M"
 	},
 	"config": {
 		"allow-plugins": {
 			"composer/installers": true,
-			"dealerdirect/phpcodesniffer-composer-installer": true
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"phpstan/extension-installer": true
+		},
+		"platform": {
+			"php": "7.4"
 		}
 	}
 }
