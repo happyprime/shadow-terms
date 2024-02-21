@@ -8,6 +8,23 @@
 namespace ShadowTerms\API;
 
 /**
+ * Determine if a taxonomy is a shadow taxonomy.
+ *
+ * @param  string|\WP_Taxonomy $taxonomy Name of taxonomy, or the taxonomy object.
+ * @return bool
+ */
+function is_shadow_taxonomy( $taxonomy ) {
+
+	if ( $taxonomy instanceof \WP_Taxonomy ) {
+		$taxonomy = $taxonomy->name;
+	}
+
+	$is_shadow_taxonomy = strcasecmp( substr( $taxonomy, -8 ), '_connect' ) === 0;
+
+	return $is_shadow_taxonomy;
+}
+
+/**
  * Retrieve a post's shadow taxonomy slug.
  *
  * @since 1.0.0
