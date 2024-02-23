@@ -110,7 +110,7 @@ function get_post_id( int $term_id ): int {
 function get_connected_post_types( string $post_type ): array {
 	$supports = get_all_post_type_supports( $post_type );
 
-	if ( is_array( $supports['shadow-terms'] ) && is_array( $supports['shadow-terms'][0] ) ) {
+	if ( isset( $supports['shadow-terms'] ) && is_array( $supports['shadow-terms'] ) && is_array( $supports['shadow-terms'][0] ) ) {
 		return $supports['shadow-terms'][0];
 	}
 
