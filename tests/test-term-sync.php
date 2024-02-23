@@ -15,8 +15,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * A newly created post with an initial status of publish should generate a shadow term.
 	 */
-	public function test_post_new_to_publish_creates_term() {
-		$this->factory->post->create(
+	public function test_post_new_to_publish_creates_term(): void {
+		$this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Apple',
@@ -33,8 +33,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * An existing draft post that is published should generate a shadow term.
 	 */
-	public function test_post_draft_to_publish_creates_term() {
-		$post = $this->factory->post->create(
+	public function test_post_draft_to_publish_creates_term(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Bean',
@@ -55,8 +55,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * A shadow term should be deleted when its connected post is deleted.
 	 */
-	public function test_post_publish_to_delete_removes_term() {
-		$post = $this->factory->post->create(
+	public function test_post_publish_to_delete_removes_term(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Corn',
@@ -76,8 +76,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * A shadow term should be deleted when its connected post is moved from publish to draft.
 	 */
-	public function test_post_publish_to_draft_removes_term() {
-		$post = $this->factory->post->create(
+	public function test_post_publish_to_draft_removes_term(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Daikon',
@@ -98,8 +98,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * Existing shadow term relationships should be stored when its connected post is moved from publish to draft.
 	 */
-	public function test_post_publish_to_draft_preserves_relationships() {
-		$post = $this->factory->post->create(
+	public function test_post_publish_to_draft_preserves_relationships(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Zebra',
@@ -109,7 +109,7 @@ class TestTermSync extends WP_UnitTestCase {
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'zebra', 'example_connect', 'OBJECT' );
 
-		$associated_post = $this->factory->post->create(
+		$associated_post = $this->factory()->post->create(
 			array(
 				'post_type'    => 'post',
 				'post_title'   => 'ABC Test 129',
@@ -130,8 +130,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * A shadow term should be deleted when its connected post is moved from publish to pending.
 	 */
-	public function test_post_publish_to_pending_removes_term() {
-		$post = $this->factory->post->create(
+	public function test_post_publish_to_pending_removes_term(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Elderberry',
@@ -152,8 +152,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * Existing shadow term relationships should be stored when its connected post is moved from publish to pending.
 	 */
-	public function test_post_publish_to_pending_preserves_relationships() {
-		$post = $this->factory->post->create(
+	public function test_post_publish_to_pending_preserves_relationships(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Yellow',
@@ -163,7 +163,7 @@ class TestTermSync extends WP_UnitTestCase {
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'yellow', 'example_connect', 'OBJECT' );
 
-		$associated_post = $this->factory->post->create(
+		$associated_post = $this->factory()->post->create(
 			array(
 				'post_type'    => 'post',
 				'post_title'   => 'ABC Test 128',
@@ -184,8 +184,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * A shadow term should be deleted when its connected post is moved from publish to private.
 	 */
-	public function test_post_publish_to_private_removes_term() {
-		$post = $this->factory->post->create(
+	public function test_post_publish_to_private_removes_term(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Xylophone',
@@ -206,8 +206,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * Existing shadow term relationships should be stored when its conncted post is moved from publish to private.
 	 */
-	public function test_post_publish_to_private_preserves_relationships() {
-		$post = $this->factory->post->create(
+	public function test_post_publish_to_private_preserves_relationships(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'French Fry',
@@ -217,7 +217,7 @@ class TestTermSync extends WP_UnitTestCase {
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'french-fry', 'example_connect', 'OBJECT' );
 
-		$associated_post = $this->factory->post->create(
+		$associated_post = $this->factory()->post->create(
 			array(
 				'post_type'    => 'post',
 				'post_title'   => 'ABC Test 127',
@@ -238,8 +238,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * Existing shadow term relationships should be restored when its connected post is moved from draft to publish.
 	 */
-	public function test_post_draft_to_publish_creates_term_and_restores_relationships() {
-		$post = $this->factory->post->create(
+	public function test_post_draft_to_publish_creates_term_and_restores_relationships(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Wrapper',
@@ -249,7 +249,7 @@ class TestTermSync extends WP_UnitTestCase {
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'wrapper', 'example_connect', 'OBJECT' );
 
-		$associated_post = $this->factory->post->create(
+		$associated_post = $this->factory()->post->create(
 			array(
 				'post_type'    => 'post',
 				'post_title'   => 'ABC Test 126',
@@ -276,8 +276,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * Existing shadow term relationships should be restored when its connected post is moved from pending to publish.
 	 */
-	public function test_post_pending_to_publish_creates_term_and_restores_relationships() {
-		$post = $this->factory->post->create(
+	public function test_post_pending_to_publish_creates_term_and_restores_relationships(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Viola',
@@ -287,7 +287,7 @@ class TestTermSync extends WP_UnitTestCase {
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'viola', 'example_connect', 'OBJECT' );
 
-		$associated_post = $this->factory->post->create(
+		$associated_post = $this->factory()->post->create(
 			array(
 				'post_type'    => 'post',
 				'post_title'   => 'ABC Test 125',
@@ -314,8 +314,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * Existing shadow term relationships should be restored when its connected post is moved from private to publish.
 	 */
-	public function test_post_private_to_publish_creates_term_and_restores_relationships() {
-		$post = $this->factory->post->create(
+	public function test_post_private_to_publish_creates_term_and_restores_relationships(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Umbrella',
@@ -325,7 +325,7 @@ class TestTermSync extends WP_UnitTestCase {
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'umbrella', 'example_connect', 'OBJECT' );
 
-		$associated_post = $this->factory->post->create(
+		$associated_post = $this->factory()->post->create(
 			array(
 				'post_type'    => 'post',
 				'post_title'   => 'ABC Test 124',
@@ -352,8 +352,8 @@ class TestTermSync extends WP_UnitTestCase {
 	/**
 	 * Existing shadow term relationships should be restored when its connected post is moved from trash to publish.
 	 */
-	public function test_post_trash_to_publish_creates_term_and_restores_relationships() {
-		$post = $this->factory->post->create(
+	public function test_post_trash_to_publish_creates_term_and_restores_relationships(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Tasty',
@@ -363,7 +363,7 @@ class TestTermSync extends WP_UnitTestCase {
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'tasty', 'example_connect', 'OBJECT' );
 
-		$associated_post = $this->factory->post->create(
+		$associated_post = $this->factory()->post->create(
 			array(
 				'post_type'    => 'post',
 				'post_title'   => 'ABC Test 123',
@@ -391,8 +391,8 @@ class TestTermSync extends WP_UnitTestCase {
 	 * An existing published post that has its title changed should change the
 	 * title of its shadow term.
 	 */
-	public function test_post_publish_to_publish_modified_title_updates_term() {
-		$post = $this->factory->post->create(
+	public function test_post_publish_to_publish_modified_title_updates_term(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Garbanzo Bean',
@@ -416,8 +416,8 @@ class TestTermSync extends WP_UnitTestCase {
 	 * An existing published post that has its slug changed should change the
 	 * slug of its shadow term.
 	 */
-	public function test_post_publish_to_publish_modified_slug_updates_term() {
-		$post = $this->factory->post->create(
+	public function test_post_publish_to_publish_modified_slug_updates_term(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Garbanzo Bean',
@@ -441,8 +441,8 @@ class TestTermSync extends WP_UnitTestCase {
 	 * An existing published post that has its title changed should change the
 	 * title of its shadow term.
 	 */
-	public function test_post_publish_to_publish_modified_title_and_slug_updates_term() {
-		$post = $this->factory->post->create(
+	public function test_post_publish_to_publish_modified_title_and_slug_updates_term(): void {
+		$post = $this->factory()->post->create(
 			array(
 				'post_type'   => 'example',
 				'post_title'  => 'Garbanzo Bean',

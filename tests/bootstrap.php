@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file.
  *
- * @package Shadow_Terms
+ * @package shadow-terms
  */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
@@ -30,7 +30,7 @@ tests_add_filter( 'init', '_register_test_post_types' );
  * Setup example post types that support or do not
  * support shadow terms.
  */
-function _register_test_post_types() { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
+function _register_test_post_types(): void { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
 	register_post_type(
 		'example',
 		array(
@@ -75,7 +75,7 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 /**
  * Manually load the plugin being tested.
  */
-function _manually_load_plugin() { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
+function _manually_load_plugin(): void { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
 	require dirname( __DIR__ ) . '/plugin.php';
 }
 
