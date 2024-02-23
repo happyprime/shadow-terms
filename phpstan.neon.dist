@@ -2,4 +2,5 @@ includes:
   - %rootDir%/../../happyprime/coding-standards/phpstan.neon.dist
 
 parameters:
-  level: 5
+  level: 6
+  checkGenericClassInNonGenericObjectType: false
