@@ -67,6 +67,11 @@ function register_taxonomy( string $post_type ): void {
 		'publicly_queryable' => false,
 		'rewrite'            => false,
 		'hierarchical'       => true,
+		'capabilities'       => array(
+			'manage_terms' => 'override_shadow_terms',
+			'edit_terms'   => 'override_shadow_terms',
+			'delete_terms' => 'override_shadow_terms',
+		),
 		'show_ui'            => true,
 		'show_in_menu'       => false,
 		'show_in_nav_menus'  => false,
