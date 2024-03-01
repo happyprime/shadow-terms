@@ -2,8 +2,8 @@
 Contributors: happyprime, jeremyfelt, slocker, philcable, wpgirl369
 Tags: terms, related, content
 Requires at least: 5.9
-Tested up to: 6.3
-Stable tag: 1.1.0
+Tested up to: 6.4
+Stable tag: 1.2.0
 License: GPLv2 or later
 Requires PHP: 7.4
 
@@ -39,6 +39,11 @@ With the example above, whenever an `organization` is created, a term with the s
 Code can then be written to query and display all people or press releases related to an organization.
 
 ## Changelog
+
+### 1.2.0
+
+* Do not show "Add New" term option for shadow taxonomies, which are automatically managed. Thanks [@s3rgiosan](https://profiles.wordpress.org/s3rgiosan/)!
+* Do not show shadow terms in REST API to unauthenticated users if their original post type is not publicly available via REST endpoint.
 
 ### 1.1.0
 
