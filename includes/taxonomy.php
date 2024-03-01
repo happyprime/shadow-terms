@@ -79,6 +79,12 @@ function register_taxonomy( string $post_type ): void {
 		'show_admin_column'  => true,
 	);
 
+	// If a post type is not publicly queryable and not visible in the REST API,
+	// we should not expose that post type's shadow terms to unauthorized users.
+	if ( false === $post_type_object->publicly_queryable && false === $post_type_object->show_in_rest && ! is_user_logged_in() ) {
+		$args['show_in_rest'] = false;
+	}
+
 	/**
 	 * Filter the arguments used to register a shadow taxonomy.
 	 *
