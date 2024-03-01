@@ -35,6 +35,11 @@ Code can then be written to query and display all people or press releases relat
 
 ## Changelog
 
+### 1.2.0
+
+* Do not show "Add New" term option for shadow taxonomies, which are automatically managed. Thanks [@s3rgiosan](https://github.com/s3rgiosan)!
+* Do not show shadow terms in REST API to unauthenticated users if their original post type is not publicly available via REST endpoint.
+
 ### 1.1.0
 
 * Add filtering to shadow taxonomy taxonomy arguments.
