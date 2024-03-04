@@ -9,8 +9,13 @@ namespace ShadowTerms\Taxonomy;
 
 use ShadowTerms\API;
 
+use function ShadowTerms\API\get_connected_post_types;
+use function ShadowTerms\API\is_shadow_taxonomy;
+
 add_action( 'init', __NAMESPACE__ . '\register', 9999 );
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_route' );
+add_action( 'rest_api_init', __NAMESPACE__ . '\remove_action_create_links' );
+add_filter( 'rest_prepare_taxonomy', __NAMESPACE__ . '\rest_prepare_taxonomy', 10, 2 );
 
 /**
  * Register all shadow taxonomies.
@@ -189,4 +194,102 @@ function handle_rest_associate( \WP_REST_Request $request ): \WP_REST_Response {
 			'posts'   => $associated_posts->posts,
 		]
 	);
+}
+
+/**
+ * Remove the `action-create-<shadow_taxonomy>` links for shadow taxonomies.
+ *
+ * The `action-create-<shadow_taxonomy>` link is used by the FlatTermSelector and HierarchicalTermSelector to determine if a term can be created.
+ *
+ * @see https://github.com/WordPress/gutenberg/blob/trunk/packages/editor/src/components/post-taxonomies/flat-term-selector.js#L82
+ * @see https://github.com/WordPress/gutenberg/blob/trunk/packages/editor/src/components/post-taxonomies/hierarchical-term-selector.js#L185
+ *
+ * @since 1.2.0
+ *
+ * @return void
+ */
+function remove_action_create_links() {
+
+	$post_types = get_post_types( [ 'show_in_rest' => true ] );
+	if ( empty ( $post_types ) ) {
+		return;
+	}
+
+	$filtered_post_types = [];
+	foreach ( $post_types as $post_type ) {
+
+		$connected_post_types = get_connected_post_types( $post_type );
+		if ( empty( $connected_post_types ) ) {
+			continue;
+		}
+
+		foreach ( $connected_post_types as $connected_post_type ) {
+			if ( in_array( $connected_post_type, $filtered_post_types, true ) ) {
+				continue;
+			}
+
+			$filtered_post_types[] = $connected_post_type;
+		}
+	}
+
+	if ( empty ( $filtered_post_types ) ) {
+		return;
+	}
+
+	foreach ( $filtered_post_types as $post_type ) {
+		add_filter( "rest_prepare_{$post_type}", __NAMESPACE__ . '\remove_action_create_link' );
+	}
+}
+
+/**
+ * Remove the `action-create-<shadow_taxonomy>` links for a shadow taxonomy.
+ *
+ * @since 1.2.0
+ *
+ * @param  \WP_REST_Response $response The response object.
+ * @return \WP_REST_Response
+ */
+function remove_action_create_link( $response ) {
+
+	$links = $response->get_links();
+	if ( empty( $links ) ) {
+		return $response;
+	}
+
+	$pattern = '/^https:\/\/api\.w\.org\/action-create-([a-zA-Z0-9_]+)_connect$/';
+
+	foreach ( $links as $rel => $link ) {
+
+		if ( preg_match( $pattern, $rel, $matches ) ) {
+			$response->remove_link( $rel );
+		}
+	}
+
+	return $response;
+}
+
+/**
+ * Add shadow taxonomy identifier for REST responses.
+ *
+ * @since 1.2.0
+ *
+ * @param  \WP_REST_Response $response The response object.
+ * @param  \WP_Taxonomy      $item     The original taxonomy object.
+ * @return \WP_REST_Response
+ */
+function rest_prepare_taxonomy( $response, $taxonomy ) {
+
+	$data = $response->get_data();
+
+	if ( ! is_shadow_taxonomy( $taxonomy ) ) {
+		return $response;
+	}
+
+	if ( ! isset( $data['shadow_terms'] ) ) {
+		$data['shadow_terms'] = true;
+	}
+
+	$response = rest_ensure_response( $data );
+
+	return $response;
 }
