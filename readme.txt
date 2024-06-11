@@ -1,4 +1,4 @@
-# Plugin Name
+# Shadow Terms
 Contributors: happyprime, jeremyfelt, slocker, philcable, wpgirl369
 Tags: terms, related, content
 Requires at least: 5.9
