@@ -3,4 +3,6 @@ includes:
 
 parameters:
   level: 6
-  checkGenericClassInNonGenericObjectType: false
+  ignoreErrors:
+    -
+      identifier: missingType.generics

@@ -35,6 +35,13 @@ Code can then be written to query and display all people or press releases relat
 
 ## Changelog
 
+### 1.2.1
+
+* No functional changes.
+* Exclude phpstan config from distribution.
+* Update development dependencies.
+* Confirm WordPress 6.6 support.
+
 ### 1.2.0
 
 * Do not show "Add New" term option for shadow taxonomies, which are automatically managed. Thanks [@s3rgiosan](https://github.com/s3rgiosan)!
