@@ -1,6 +1,8 @@
 {
 	"name": "happyprime/shadow-terms",
+	"description": "Use terms from generated taxonomies to associate related content.",
 	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
 	"minimum-stability": "stable",
 	"require-dev": {
 		"happyprime/coding-standards": "*",
