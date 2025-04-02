@@ -9,7 +9,6 @@
 		"phpcompatibility/php-compatibility": "dev-develop as 9.99.99"
 	},
 	"scripts": {
-		"build": "composer install --no-dev --optimize-autoloader && wp dist-archive ./",
 		"phpcs": "vendor/bin/phpcs",
 		"phpcbf": "vendor/bin/phpcbf",
 		"phpunit": "vendor/bin/phpunit",
