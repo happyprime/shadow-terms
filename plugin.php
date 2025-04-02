@@ -6,6 +6,8 @@
  * Plugin URI:   https://github.com/happyprime/shadow-terms/
  * Author:       Happy Prime
  * Author URI:   https://happyprime.co
+ * License:      GPLv2 or later
+ * License URI:  https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain:  shadow-terms
  * Requires PHP: 7.4
  *

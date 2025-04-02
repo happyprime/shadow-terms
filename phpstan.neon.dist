@@ -2,7 +2,6 @@ includes:
   - %rootDir%/../../happyprime/coding-standards/phpstan.neon.dist
 
 parameters:
-  level: 6
+  level: 5
   ignoreErrors:
-    -
-      identifier: missingType.generics
+      - '#Parameter \#1 \$postarr of function wp_update_post expects array\{ID\?\: int, post_author\?\: int, post_date\?\: string, post_date_gmt\?\: string, post_content\?\: string, post_content_filtered\?\: string, post_title\?\: string, post_excerpt\?\: string, \.\.\.\}, WP_Post\|null given\.#'

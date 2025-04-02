@@ -1,7 +1,7 @@
-# Run PHPUnit.
+# Run WP.org's plugin check.
 #
 # This file is managed in https://github.com/happyprime/projects
-name: PHPUnit
+name: WP.org Plugin Check
 
 on:
   push:
@@ -13,4 +13,6 @@ on:
 
 jobs:
   call-workflow:
-    uses: happyprime/workflows/.github/workflows/phpunit.yml@trunk
+    uses: happyprime/workflows/.github/workflows/plugin-check.yml@trunk
+    with:
+      php-version: '8.3'
