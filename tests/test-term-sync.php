@@ -41,6 +41,11 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'draft',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 
 		$post->post_status = 'publish';
@@ -63,8 +68,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'corn', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		wp_delete_post( $post->ID, true );
 
@@ -84,8 +98,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'daikon', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		$post->post_status = 'draft';
 		wp_update_post( $post );
@@ -106,8 +129,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'zebra', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		$associated_post = $this->factory()->post->create(
 			array(
@@ -116,6 +148,10 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_content' => 'Everything and nothing.',
 			)
 		);
+
+		if ( is_wp_error( $associated_post ) ) {
+			$this->fail( 'Failed to create associated post.' );
+		}
 
 		wp_set_object_terms( $associated_post, $term->term_id, 'example_connect' );
 
@@ -138,8 +174,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'elderberry', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		$post->post_status = 'pending';
 		wp_update_post( $post );
@@ -160,8 +205,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'yellow', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		$associated_post = $this->factory()->post->create(
 			array(
@@ -170,6 +224,10 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_content' => 'Everything and nothing.',
 			)
 		);
+
+		if ( is_wp_error( $associated_post ) ) {
+			$this->fail( 'Failed to create associated post.' );
+		}
 
 		wp_set_object_terms( $associated_post, $term->term_id, 'example_connect' );
 
@@ -192,8 +250,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'xylophone', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		$post->post_status = 'private';
 		wp_update_post( $post );
@@ -214,8 +281,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'french-fry', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		$associated_post = $this->factory()->post->create(
 			array(
@@ -224,6 +300,10 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_content' => 'Everything and nothing.',
 			)
 		);
+
+		if ( is_wp_error( $associated_post ) ) {
+			$this->fail( 'Failed to create associated post.' );
+		}
 
 		wp_set_object_terms( $associated_post, $term->term_id, 'example_connect' );
 
@@ -246,8 +326,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'wrapper', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		$associated_post = $this->factory()->post->create(
 			array(
@@ -256,6 +345,10 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_content' => 'Everything and nothing.',
 			)
 		);
+
+		if ( is_wp_error( $associated_post ) ) {
+			$this->fail( 'Failed to create associated post.' );
+		}
 
 		wp_set_object_terms( $associated_post, $term->term_id, 'example_connect' );
 
@@ -268,6 +361,11 @@ class TestTermSync extends WP_UnitTestCase {
 		wp_update_post( $post );
 
 		$associated_terms = wp_get_object_terms( $associated_posts, 'example_connect' );
+
+		if ( is_wp_error( $associated_terms ) ) {
+			$this->fail( 'Failed to get associated terms.' );
+		}
+
 		$associated_terms = wp_list_pluck( $associated_terms, 'slug' );
 
 		$this->assertEquals( array( $term->slug ), $associated_terms, 'Existing shadow term relationships should be restored when its connected post is moved from draft to publish.' );
@@ -284,8 +382,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'viola', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		$associated_post = $this->factory()->post->create(
 			array(
@@ -294,6 +401,10 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_content' => 'Everything and nothing.',
 			)
 		);
+
+		if ( is_wp_error( $associated_post ) ) {
+			$this->fail( 'Failed to create associated post.' );
+		}
 
 		wp_set_object_terms( $associated_post, $term->term_id, 'example_connect' );
 
@@ -306,6 +417,11 @@ class TestTermSync extends WP_UnitTestCase {
 		wp_update_post( $post );
 
 		$associated_terms = wp_get_object_terms( $associated_posts, 'example_connect' );
+
+		if ( is_wp_error( $associated_terms ) ) {
+			$this->fail( 'Failed to get associated terms.' );
+		}
+
 		$associated_terms = wp_list_pluck( $associated_terms, 'slug' );
 
 		$this->assertEquals( array( $term->slug ), $associated_terms, 'Existing shadow term relationships should be restored when its connected post is moved from pending to publish.' );
@@ -322,8 +438,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'umbrella', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		$associated_post = $this->factory()->post->create(
 			array(
@@ -332,6 +457,10 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_content' => 'Everything and nothing.',
 			)
 		);
+
+		if ( is_wp_error( $associated_post ) ) {
+			$this->fail( 'Failed to create associated post.' );
+		}
 
 		wp_set_object_terms( $associated_post, $term->term_id, 'example_connect' );
 
@@ -344,6 +473,11 @@ class TestTermSync extends WP_UnitTestCase {
 		wp_update_post( $post );
 
 		$associated_terms = wp_get_object_terms( $associated_posts, 'example_connect' );
+
+		if ( is_wp_error( $associated_terms ) ) {
+			$this->fail( 'Failed to get associated terms.' );
+		}
+
 		$associated_terms = wp_list_pluck( $associated_terms, 'slug' );
 
 		$this->assertEquals( array( $term->slug ), $associated_terms, 'Existing shadow term relationships should be restored when its connected post is moved from private to publish.' );
@@ -360,8 +494,17 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 		$term = get_term_by( 'slug', 'tasty', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
 
 		$associated_post = $this->factory()->post->create(
 			array(
@@ -370,6 +513,10 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_content' => 'Everything and nothing.',
 			)
 		);
+
+		if ( is_wp_error( $associated_post ) ) {
+			$this->fail( 'Failed to create associated post.' );
+		}
 
 		wp_set_object_terms( $associated_post, $term->term_id, 'example_connect' );
 
@@ -382,6 +529,11 @@ class TestTermSync extends WP_UnitTestCase {
 		wp_update_post( $post );
 
 		$associated_terms = wp_get_object_terms( $associated_posts, 'example_connect' );
+
+		if ( is_wp_error( $associated_terms ) ) {
+			$this->fail( 'Failed to get associated terms.' );
+		}
+
 		$associated_terms = wp_list_pluck( $associated_terms, 'slug' );
 
 		$this->assertEquals( array( $term->slug ), $associated_terms, 'Existing shadow term relationships should be restored when its connected post is moved from trash to publish.' );
@@ -399,6 +551,11 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 
 		$post->post_title = 'Chickpea';
@@ -424,6 +581,11 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 
 		$post->post_name = 'chickpea';
@@ -449,6 +611,11 @@ class TestTermSync extends WP_UnitTestCase {
 				'post_status' => 'publish',
 			)
 		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
 		$post = get_post( $post );
 
 		$post->post_title = 'Chickpea';
