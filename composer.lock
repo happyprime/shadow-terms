@@ -157,16 +157,16 @@
         },
         {
             "name": "happyprime/coding-standards",
-            "version": "0.0.5",
+            "version": "0.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/happyprime/coding-standards.git",
-                "reference": "58b92cbc5f4c96819658ec3a0c922729a541ce18"
+                "reference": "289c561a21a04a8c2b71e1121e3835342b7344b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/happyprime/coding-standards/zipball/58b92cbc5f4c96819658ec3a0c922729a541ce18",
-                "reference": "58b92cbc5f4c96819658ec3a0c922729a541ce18",
+                "url": "https://api.github.com/repos/happyprime/coding-standards/zipball/289c561a21a04a8c2b71e1121e3835342b7344b3",
+                "reference": "289c561a21a04a8c2b71e1121e3835342b7344b3",
                 "shasum": ""
             },
             "require": {
@@ -196,9 +196,9 @@
             "description": "Happy Prime coding standards",
             "support": {
                 "issues": "https://github.com/happyprime/coding-standards/issues",
-                "source": "https://github.com/happyprime/coding-standards/tree/0.0.5"
+                "source": "https://github.com/happyprime/coding-standards/tree/0.0.6"
             },
-            "time": "2025-05-08T14:04:16+00:00"
+            "time": "2025-06-13T14:09:30+00:00"
         },
         {
             "name": "myclabs/deep-copy",
