@@ -35,6 +35,13 @@ Code can then be written to query and display all people or press releases relat
 
 ## Changelog
 
+### 1.2.2
+
+* No functional changes.
+* Bump phpstan to level 7.
+* Update development dependencies.
+* Confirm WordPress 6.8 support.
+
 ### 1.2.1
 
 * No functional changes.
