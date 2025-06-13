@@ -60,6 +60,10 @@ function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $updat
 
 		$new_term = wp_insert_term( $title_after, $taxonomy );
 
+		if ( is_wp_error( $new_term ) ) {
+			return;
+		}
+
 		foreach ( $existing_associations as $association ) {
 			wp_set_object_terms( $association, $new_term['term_id'], $taxonomy );
 		}

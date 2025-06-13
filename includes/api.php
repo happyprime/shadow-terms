@@ -72,7 +72,7 @@ function get_term_id( int $post_id ): int {
 function get_post_id( int $term_id ): int {
 	$term = get_term( $term_id );
 
-	if ( ! $term ) {
+	if ( ! $term || is_wp_error( $term ) ) {
 		return 0;
 	}
 
