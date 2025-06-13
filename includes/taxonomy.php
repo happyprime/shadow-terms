@@ -118,7 +118,7 @@ function can_associate_posts(): bool {
  *
  * @since 1.0.0
  *
- * @param \WP_REST_Request $request The request to associate posts.
+ * @param \WP_REST_Request<array<string, mixed>> $request The request to associate posts.
  * @return \WP_REST_Response The response data.
  */
 function handle_rest_associate( \WP_REST_Request $request ): \WP_REST_Response {
