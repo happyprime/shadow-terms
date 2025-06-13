@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <ruleset name="WordPress coding standards for Happy Prime plugins">
 	<file>.</file>
-	<rule ref="vendor/happyprime/coding-standards/HappyPrime"/>
+	<rule ref="vendor/happyprime/coding-standards/HappyPrime">
+		<exclude name="Squiz.Commenting.FunctionComment.IncorrectTypeHint" />
+	</rule>
 </ruleset>
