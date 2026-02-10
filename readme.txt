@@ -3,7 +3,7 @@ Contributors: happyprime, jeremyfelt, slocker, philcable, wpgirl369
 Tags: terms, related, content
 Requires at least: 5.9
 Tested up to: 6.9
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 Requires PHP: 7.4
 
@@ -39,6 +39,13 @@ With the example above, whenever an `organization` is created, a term with the s
 Code can then be written to query and display all people or press releases related to an organization.
 
 ## Changelog
+
+### 1.2.3
+
+* In a case where a published post is missing its associated shadow term, create one on post update.
+* Bail early on direct access to plugin files.
+* Confirm WordPress 6.9 support.
+* Update development dependencies.
 
 ### 1.2.2
 
