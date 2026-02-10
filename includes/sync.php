@@ -91,6 +91,27 @@ function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $updat
 		return;
 	}
 
+	// If a post is already published and not undergoing a status change, but does not
+	// have an associated term, create one.
+	if ( 'publish' === $status_before && 'publish' === $status_after && false === $term_after ) {
+		// In the very unlikely condition that a term _was_ associated, but now is
+		// lost to the ether, attempt to restore previous post associations.
+		$existing_associations = (array) get_post_meta( $post_id, "{$taxonomy}_associated_posts", true );
+		$existing_associations = array_filter( $existing_associations );
+
+		$new_term = wp_insert_term( $title_after, $taxonomy );
+
+		if ( is_wp_error( $new_term ) ) {
+			return;
+		}
+
+		foreach ( $existing_associations as $association ) {
+			wp_set_object_terms( $association, $new_term['term_id'], $taxonomy );
+		}
+
+		return;
+	}
+
 	// If the post transitioned from published to not published, remove the associated term.
 	if ( 'publish' !== $status_after && $term_before ) {
 		$associated_posts = get_objects_in_term( $term_before->term_id, $taxonomy );

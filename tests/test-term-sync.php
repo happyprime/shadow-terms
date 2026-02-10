@@ -540,6 +540,44 @@ class TestTermSync extends WP_UnitTestCase {
 	}
 
 	/**
+	 * A published post without a shadow term should have one created on update.
+	 */
+	public function test_post_publish_to_publish_creates_missing_term(): void {
+		$post = $this->factory()->post->create(
+			array(
+				'post_type'   => 'example',
+				'post_title'  => 'Hazelnut',
+				'post_status' => 'publish',
+			)
+		);
+
+		if ( is_wp_error( $post ) ) {
+			$this->fail( 'Failed to create post.' );
+		}
+
+		$post = get_post( $post );
+		$term = get_term_by( 'slug', 'hazelnut', 'example_connect', 'OBJECT' );
+
+		if ( ! $term ) {
+			$this->fail( 'Expected term not available.' );
+		}
+
+		// Delete the shadow term to simulate the missing term condition.
+		wp_delete_term( $term->term_id, 'example_connect' );
+
+		$term = get_term_by( 'slug', 'hazelnut', 'example_connect', 'OBJECT' );
+		$this->assertFalse( $term, 'Shadow term should have been deleted.' );
+
+		// Update the post without changing its status.
+		wp_update_post( $post );
+
+		$term      = get_term_by( 'name', 'Hazelnut', 'example_connect', 'OBJECT' );
+		$term_name = ! $term ? '' : $term->name;
+
+		$this->assertEquals( 'Hazelnut', $term_name, 'A published post without a shadow term should have one created on update.' );
+	}
+
+	/**
 	 * An existing published post that has its title changed should change the
 	 * title of its shadow term.
 	 */
