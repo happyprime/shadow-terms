@@ -35,6 +35,13 @@ Code can then be written to query and display all people or press releases relat
 
 ## Changelog
 
+### 1.2.3
+
+* In a case where a published post is missing its associated shadow term, create one on post update.
+* Bail early on direct access to plugin files.
+* Confirm WordPress 6.9 support.
+* Update development dependencies.
+
 ### 1.2.2
 
 * No functional changes.
