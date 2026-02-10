@@ -7,6 +7,10 @@
 
 namespace ShadowTerms\API;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Retrieve a post's shadow taxonomy slug.
  *
