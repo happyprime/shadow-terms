@@ -7,6 +7,10 @@
 
 namespace ShadowTerms\Sync;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_action( 'wp_after_insert_post', __NAMESPACE__ . '\sync_shadow_taxonomies', 10, 4 );
 add_action( 'deleted_post', __NAMESPACE__ . '\delete_term', 10, 2 );
 

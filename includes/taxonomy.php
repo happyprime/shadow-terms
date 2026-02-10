@@ -9,6 +9,10 @@ namespace ShadowTerms\Taxonomy;
 
 use ShadowTerms\API;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_action( 'init', __NAMESPACE__ . '\register', 9999 );
 add_action( 'rest_api_init', __NAMESPACE__ . '\register_route' );
 
