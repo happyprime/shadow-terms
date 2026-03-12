@@ -3,6 +3,7 @@ bin/
 tests/
 vendor/
 .distignore
+.editorconfig
 .git
 .gitignore
 .phpcs.xml.dist
