@@ -1,0 +1,19 @@
+{
+	"landingPage": "/wp-admin/plugins.php",
+	"preferredVersions": {
+		"php": "8.2",
+		"wp": "latest"
+	},
+	"steps": [
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "shadow-terms"
+			}
+		},
+		{
+			"step": "login"
+		}
+	]
+}
