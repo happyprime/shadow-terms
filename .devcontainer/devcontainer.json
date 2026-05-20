@@ -1,0 +1,15 @@
+{
+	"name": "Shadow Terms",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	},
+	"postCreateCommand": "npm -g install @wordpress/env",
+	"forwardPorts": [8888],
+	"portsAttributes": {
+		"8888": {
+			"label": "WordPress",
+			"onAutoForward": "notify"
+		}
+	}
+}
