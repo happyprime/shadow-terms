@@ -235,4 +235,54 @@ class TestMultiAssociation extends WP_UnitTestCase {
 			'Associating a connected post with a second shadow term via REST should not wipe the prior association.'
 		);
 	}
+
+	/**
+	 * REST `associate` endpoint should recreate a missing term rather than
+	 * silently succeeding (taxonomy.php).
+	 *
+	 * If a published shadow post's term has been deleted and the post has not
+	 * been re-saved, the term cannot be resolved. The endpoint must recreate it
+	 * and attach it instead of reporting success while attaching nothing.
+	 */
+	public function test_rest_associate_recreates_missing_published_term(): void {
+		$editor_id = $this->factory()->user->create( array( 'role' => 'editor' ) );
+
+		if ( is_wp_error( $editor_id ) ) {
+			$this->fail( 'Failed to create editor user.' );
+		}
+
+		wp_set_current_user( $editor_id );
+
+		$acme_id    = $this->create_post( 'example', 'Acme' );
+		$article_id = $this->create_post( 'post', 'Article' );
+
+		// Delete the term but leave the post published and un-saved, so the sync
+		// recovery branch never runs and the term stays missing.
+		$acme_term = get_term_by( 'slug', 'acme', 'example_connect' );
+
+		if ( ! $acme_term ) {
+			$this->fail( 'Expected an acme shadow term.' );
+		}
+
+		wp_delete_term( $acme_term->term_id, 'example_connect' );
+
+		$request = new WP_REST_Request( 'POST', '/shadow-terms/v1/associate' );
+		$request->set_param( 'postId', $acme_id );
+		$request->set_param( 'associatedPostId', $article_id );
+
+		$response = $this->rest_server->dispatch( $request );
+		$this->assertSame( 200, $response->get_status(), 'Associate call should return 200.' );
+
+		$data = $response->get_data();
+		$this->assertTrue(
+			is_array( $data ) && true === $data['success'],
+			'Associate should report success only after the missing term is recreated.'
+		);
+
+		$this->assertSame(
+			array( 'acme' ),
+			$this->associated_slugs( $article_id ),
+			'A recreated shadow term should actually be attached to the connected post.'
+		);
+	}
 }
