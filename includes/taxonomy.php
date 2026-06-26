@@ -165,7 +165,9 @@ function handle_rest_associate( \WP_REST_Request $request ): \WP_REST_Response {
 		);
 	}
 
-	wp_set_object_terms( $associated_post_id, API\get_term_id( $post_id ), API\get_taxonomy_slug( $post_id ) );
+	// Append so associating this post with a shadow term does not wipe any
+	// prior shadow-term associations it already has in the same taxonomy.
+	wp_set_object_terms( $associated_post_id, API\get_term_id( $post_id ), API\get_taxonomy_slug( $post_id ), true );
 
 	$associated_post  = get_post( $associated_post_id );
 	$associated_posts = new \WP_Query(
