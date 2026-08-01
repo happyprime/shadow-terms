@@ -1,0 +1,35 @@
+# Run PHPCS, PHPStan, and PHPUnit in a single job.
+#
+# Each check runs only when the project is configured for it, so this file is
+# safe to sync to a repository that has only some of them. A check the project
+# is configured for but cannot run is reported on the pull request rather than
+# failed.
+#
+# This file is managed in https://github.com/happyprime/projects
+name: PHP checks
+
+on:
+  push:
+    branches:
+      - trunk
+      - develop
+  pull_request:
+    branches:
+      - trunk
+      - develop
+
+# The consolidated workflow comments on the pull request when a project is
+# configured for a check it cannot run. A workflow level permissions block caps
+# what a reusable workflow receives, so the write scope is granted here.
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  call-workflow:
+    uses: happyprime/workflows/.github/workflows/php-checks.yml@trunk
+    with:
+      php-version: '8.4'
+      wp-versions: 'latest trunk'
+    secrets:
+      composer-auth-token: ${{ secrets.COMPOSER_AUTH_TOKEN }}
