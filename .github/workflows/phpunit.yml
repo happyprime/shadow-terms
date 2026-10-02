@@ -7,9 +7,19 @@ on:
   push:
     branches:
       - trunk
+    # A change to another workflow file is no reason to run this one.
+    paths:
+      - '**'
+      - '!.github/workflows/**'
+      - .github/workflows/phpunit.yml
   pull_request:
     branches:
       - trunk
+    # A change to another workflow file is no reason to run this one.
+    paths:
+      - '**'
+      - '!.github/workflows/**'
+      - .github/workflows/phpunit.yml
 
 jobs:
   call-workflow:
