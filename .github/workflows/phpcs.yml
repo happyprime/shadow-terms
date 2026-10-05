@@ -3,7 +3,13 @@
 # This file is managed in https://github.com/happyprime/projects
 name: PHPCS (Default, PHP 8.3)
 
-on: pull_request
+on:
+  pull_request:
+    # A change to another workflow file is no reason to run this one.
+    paths:
+      - '**'
+      - '!.github/workflows/**'
+      - .github/workflows/phpcs.yml
 
 # The GITHUB_TOKEN used by Dependabot has read-only permissions by default. We
 # provide write permissions to this workflow so that comments can be left on
