@@ -48,6 +48,20 @@ function register_route(): void {
 			'methods'             => \WP_REST_Server::CREATABLE,
 			'callback'            => __NAMESPACE__ . '\handle_rest_associate',
 			'permission_callback' => __NAMESPACE__ . '\can_associate_posts',
+			'args'                => array(
+				'postId'           => array(
+					'description' => __( 'The ID of the post whose shadow term is assigned.', 'shadow-terms' ),
+					'type'        => 'integer',
+					'minimum'     => 1,
+					'required'    => true,
+				),
+				'associatedPostId' => array(
+					'description' => __( 'The ID of the post that receives the shadow term.', 'shadow-terms' ),
+					'type'        => 'integer',
+					'minimum'     => 1,
+					'required'    => true,
+				),
+			),
 		)
 	);
 }
@@ -107,14 +121,24 @@ function register_taxonomy( string $post_type ): void {
 }
 
 /**
- * Determine whether the current user can associated shadow terms with posts.
+ * Determine whether the current user can associate shadow terms with posts.
  *
  * @since 1.0.0
  *
+ * @param \WP_REST_Request<array<string, mixed>>|null $request The request to associate posts.
  * @return bool True if capable. False if not.
  */
-function can_associate_posts(): bool {
-	return current_user_can( 'edit_posts' );
+function can_associate_posts( ?\WP_REST_Request $request = null ): bool {
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		return false;
+	}
+
+	if ( null === $request ) {
+		return true;
+	}
+
+	// The associated post's terms change, so the user must be able to edit it.
+	return current_user_can( 'edit_post', absint( $request->get_param( 'associatedPostId' ) ) );
 }
 
 /**
@@ -126,21 +150,31 @@ function can_associate_posts(): bool {
  * @return \WP_REST_Response The response data.
  */
 function handle_rest_associate( \WP_REST_Request $request ): \WP_REST_Response {
-	$post_id            = (int) $request->get_param( 'postId' );
-	$associated_post_id = (int) $request->get_param( 'associatedPostId' );
+	$post_id            = absint( $request->get_param( 'postId' ) );
+	$associated_post_id = absint( $request->get_param( 'associatedPostId' ) );
 	$taxonomy_slug      = API\get_taxonomy_slug( $post_id );
+	$post               = get_post( $post_id );
+	$associated_post    = get_post( $associated_post_id );
 
-	if ( ! $taxonomy_slug ) {
+	if ( ! $taxonomy_slug || ! $post ) {
 		return rest_ensure_response(
 			[
 				'success' => false,
-				'message' => 'This post type is not associated with a shadow taxonomy.',
+				'message' => __( 'This post type is not associated with a shadow taxonomy.', 'shadow-terms' ),
 				'posts'   => [],
 			]
 		);
 	}
 
-	$post = get_post( $post_id );
+	if ( ! $associated_post || ! is_object_in_taxonomy( $associated_post->post_type, $taxonomy_slug ) ) {
+		return rest_ensure_response(
+			[
+				'success' => false,
+				'message' => __( 'The associated post type does not support this shadow taxonomy.', 'shadow-terms' ),
+				'posts'   => [],
+			]
+		);
+	}
 
 	if ( 'publish' !== $post->post_status ) {
 		$associated_posts = get_post_meta( $post_id, $taxonomy_slug . '_associated_posts', true );
@@ -180,7 +214,7 @@ function handle_rest_associate( \WP_REST_Request $request ): \WP_REST_Response {
 		return rest_ensure_response(
 			[
 				'success' => false,
-				'message' => 'A shadow term for this post could not be resolved.',
+				'message' => __( 'A shadow term for this post could not be resolved.', 'shadow-terms' ),
 				'posts'   => [],
 			]
 		);
@@ -189,7 +223,6 @@ function handle_rest_associate( \WP_REST_Request $request ): \WP_REST_Response {
 	// Append so the associated post keeps its other terms in this taxonomy.
 	wp_set_object_terms( $associated_post_id, $term_id, $taxonomy_slug, true );
 
-	$associated_post  = get_post( $associated_post_id );
 	$associated_posts = new \WP_Query(
 		[
 			'fields'                 => 'ids',
