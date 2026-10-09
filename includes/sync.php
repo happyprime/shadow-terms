@@ -69,7 +69,8 @@ function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $updat
 		}
 
 		foreach ( $existing_associations as $association ) {
-			wp_set_object_terms( $association, $new_term['term_id'], $taxonomy );
+			// Append so the associated post keeps its other terms in this taxonomy.
+			wp_set_object_terms( $association, $new_term['term_id'], $taxonomy, true );
 		}
 
 		return;
@@ -106,7 +107,8 @@ function sync_shadow_taxonomies( int $post_id, \WP_Post $post_after, bool $updat
 		}
 
 		foreach ( $existing_associations as $association ) {
-			wp_set_object_terms( $association, $new_term['term_id'], $taxonomy );
+			// Append so the associated post keeps its other terms in this taxonomy.
+			wp_set_object_terms( $association, $new_term['term_id'], $taxonomy, true );
 		}
 
 		return;

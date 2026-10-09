@@ -48,6 +48,10 @@ class TestTermSync extends WP_UnitTestCase {
 
 		$post = get_post( $post );
 
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$post->post_status = 'publish';
 		wp_update_post( $post );
 
@@ -74,6 +78,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'corn', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -104,6 +113,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'daikon', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -135,6 +149,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'zebra', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -180,6 +199,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'elderberry', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -211,6 +235,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'yellow', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -256,6 +285,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'xylophone', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -287,6 +321,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'french-fry', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -332,6 +371,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'wrapper', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -388,6 +432,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'viola', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -444,6 +493,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'umbrella', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -500,6 +554,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'tasty', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -556,6 +615,11 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$term = get_term_by( 'slug', 'hazelnut', 'example_connect', 'OBJECT' );
 
 		if ( ! $term ) {
@@ -596,6 +660,10 @@ class TestTermSync extends WP_UnitTestCase {
 
 		$post = get_post( $post );
 
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$post->post_title = 'Chickpea';
 		wp_update_post( $post );
 
@@ -626,6 +694,10 @@ class TestTermSync extends WP_UnitTestCase {
 
 		$post = get_post( $post );
 
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
+
 		$post->post_name = 'chickpea';
 		wp_update_post( $post );
 
@@ -655,6 +727,10 @@ class TestTermSync extends WP_UnitTestCase {
 		}
 
 		$post = get_post( $post );
+
+		if ( ! $post ) {
+			$this->fail( 'Failed to load post.' );
+		}
 
 		$post->post_title = 'Chickpea';
 		$post->post_name  = 'chickpea';
