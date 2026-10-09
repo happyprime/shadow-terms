@@ -11,7 +11,7 @@ namespace ShadowTerms\Demo;
 add_action( 'init', __NAMESPACE__ . '\register_post_types' );
 add_action( 'init', __NAMESPACE__ . '\register_templates' );
 add_filter( 'shadow_terms_register_taxonomy_args', __NAMESPACE__ . '\filter_taxonomy_args', 10, 2 );
-add_filter( 'pre_render_block', __NAMESPACE__ . '\filter_related_query', 15, 2 );
+add_filter( 'pre_render_block', __NAMESPACE__ . '\filter_related_query', 10, 2 );
 
 /**
  * Registers the organization and person post types.

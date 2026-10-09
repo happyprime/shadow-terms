@@ -94,7 +94,7 @@ $shadow_terms_orgs = array(
 	'acme'     => shadow_terms_seed_post( 'organization', 'Acme Corporation', shadow_terms_seed_paragraph( 'Acme makes everything. Its shadow term is created when this post is published.' ) ),
 	'globex'   => shadow_terms_seed_post( 'organization', 'Globex', shadow_terms_seed_paragraph( 'Globex is a published organization with several associated posts and people.' ) ),
 	'initech'  => shadow_terms_seed_post( 'organization', 'Initech', shadow_terms_seed_paragraph( 'Initech is a published organization with one associated post.' ) ),
-	'umbrella' => shadow_terms_seed_post( 'organization', 'Umbrella Labs', shadow_terms_seed_paragraph( 'Umbrella Labs is a draft. It has no shadow term until it is published, but posts can already be associated with it.' ), 'draft' ),
+	'umbrella' => shadow_terms_seed_post( 'organization', 'Umbrella Labs', shadow_terms_seed_paragraph( 'Umbrella Labs starts as a draft with no shadow term. Publish it to create the term and restore the posts already associated with it.' ), 'draft' ),
 );
 
 $shadow_terms_people = array(
