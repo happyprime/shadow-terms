@@ -2,7 +2,7 @@
 Contributors: happyprime, jeremyfelt, slocker, philcable, wpgirl369
 Tags: terms, related, content
 Requires at least: 5.9
-Tested up to: 6.9
+Tested up to: 7.1
 Stable tag: 1.2.3
 License: GPLv2 or later
 Requires PHP: 7.4
