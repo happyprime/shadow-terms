@@ -167,10 +167,7 @@ function handle_rest_associate( \WP_REST_Request $request ): \WP_REST_Response {
 
 	$term_id = API\get_term_id( $post_id );
 
-	// A published shadow post should always have a term. If it has gone missing
-	// (e.g. the term was deleted directly in the admin and the post has not been
-	// re-saved to trigger the sync recovery branch), recreate it so the
-	// association is not silently dropped.
+	// Recreate a missing term, as the sync does the next time the post is saved.
 	if ( 0 === $term_id ) {
 		$new_term = wp_insert_term( $post->post_title, $taxonomy_slug );
 
@@ -179,8 +176,6 @@ function handle_rest_associate( \WP_REST_Request $request ): \WP_REST_Response {
 		}
 	}
 
-	// If a term still cannot be resolved, report failure rather than returning a
-	// misleading success response for an association that did not happen.
 	if ( 0 === $term_id ) {
 		return rest_ensure_response(
 			[
@@ -191,8 +186,7 @@ function handle_rest_associate( \WP_REST_Request $request ): \WP_REST_Response {
 		);
 	}
 
-	// Append so associating this post with a shadow term does not wipe any
-	// prior shadow-term associations it already has in the same taxonomy.
+	// Append so the associated post keeps its other terms in this taxonomy.
 	wp_set_object_terms( $associated_post_id, $term_id, $taxonomy_slug, true );
 
 	$associated_post  = get_post( $associated_post_id );

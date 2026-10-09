@@ -2,14 +2,7 @@
 /**
  * Class TestMultiAssociation
  *
- * Regression tests covering the three call sites where `wp_set_object_terms`
- * was invoked without `$append = true`, which silently destroyed existing
- * shadow-term associations on the connected post.
- *
- * Each test exercises one of the three call sites:
- *   - includes/sync.php:73     (restore loop on draft → publish)
- *   - includes/sync.php:110    (recovery loop when the shadow term is missing)
- *   - includes/taxonomy.php:170 (REST `associate` endpoint for a published shadow post)
+ * Tests that assigning one shadow term keeps a post's other shadow terms.
  *
  * @package shadow-terms
  */
@@ -94,13 +87,7 @@ class TestMultiAssociation extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Restore loop on draft → publish should preserve other associations
-	 * (sync.php:73).
-	 *
-	 * When a shadow post returns to published, the plugin re-attaches the new
-	 * shadow term to every previously associated post. That loop must append the
-	 * term so it does not replace the connected post's other `example_connect`
-	 * terms.
+	 * Republishing a shadow post restores its term without removing other terms.
 	 */
 	public function test_restore_on_publish_preserves_other_associations(): void {
 		$acme_id = $this->create_post( 'example', 'Acme' );
@@ -146,12 +133,7 @@ class TestMultiAssociation extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Recovery loop when the shadow term is missing should preserve other
-	 * associations (sync.php:110).
-	 *
-	 * If a published shadow post has lost its term (e.g., manually deleted in
-	 * admin) and is saved again, the plugin recreates the term and restores
-	 * known associations. That restore loop must append rather than replace.
+	 * Recreating a missing shadow term does not remove other terms.
 	 */
 	public function test_missing_term_recovery_preserves_other_associations(): void {
 		$acme_id = $this->create_post( 'example', 'Acme' );
@@ -193,12 +175,7 @@ class TestMultiAssociation extends WP_UnitTestCase {
 	}
 
 	/**
-	 * REST `associate` endpoint should preserve prior associations
-	 * (taxonomy.php:170).
-	 *
-	 * Associating a connected post with a second published shadow post via the
-	 * REST endpoint must be additive rather than replacing the first
-	 * association.
+	 * A second REST association adds to the first rather than replacing it.
 	 */
 	public function test_rest_associate_preserves_prior_associations(): void {
 		$editor_id = $this->factory()->user->create( array( 'role' => 'editor' ) );
@@ -237,12 +214,7 @@ class TestMultiAssociation extends WP_UnitTestCase {
 	}
 
 	/**
-	 * REST `associate` endpoint should recreate a missing term rather than
-	 * silently succeeding (taxonomy.php).
-	 *
-	 * If a published shadow post's term has been deleted and the post has not
-	 * been re-saved, the term cannot be resolved. The endpoint must recreate it
-	 * and attach it instead of reporting success while attaching nothing.
+	 * The REST endpoint recreates a published post's missing term and attaches it.
 	 */
 	public function test_rest_associate_recreates_missing_published_term(): void {
 		$editor_id = $this->factory()->user->create( array( 'role' => 'editor' ) );
