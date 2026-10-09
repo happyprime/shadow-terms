@@ -16,7 +16,7 @@ class TestMultiAssociation extends WP_UnitTestCase {
 	/**
 	 * REST server used to dispatch requests in REST-level tests.
 	 *
-	 * @var WP_REST_Server|null
+	 * @var WP_REST_Server
 	 */
 	protected $rest_server;
 
@@ -37,8 +37,7 @@ class TestMultiAssociation extends WP_UnitTestCase {
 	 */
 	public function tear_down(): void {
 		global $wp_rest_server;
-		$wp_rest_server    = null;
-		$this->rest_server = null;
+		$wp_rest_server = null;
 
 		parent::tear_down();
 	}
@@ -116,7 +115,12 @@ class TestMultiAssociation extends WP_UnitTestCase {
 
 		// Acme → draft. The plugin deletes the acme shadow term and stores the
 		// list of previously-associated posts in postmeta on the acme post.
-		$acme              = get_post( $acme_id );
+		$acme = get_post( $acme_id );
+
+		if ( ! $acme ) {
+			$this->fail( 'Failed to load acme post.' );
+		}
+
 		$acme->post_status = 'draft';
 		wp_update_post( $acme );
 

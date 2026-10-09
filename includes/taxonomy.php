@@ -77,6 +77,10 @@ function register_route(): void {
 function register_taxonomy( string $post_type ): void {
 	$post_type_object = get_post_type_object( $post_type );
 
+	if ( ! $post_type_object ) {
+		return;
+	}
+
 	$args = array(
 		'label'              => $post_type_object->label,
 		'labels'             => $post_type_object->labels,
