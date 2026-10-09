@@ -11,6 +11,17 @@ on:
       - '!.github/workflows/**'
       - .github/workflows/phpstan.yml
 
+# Cancel a run that a newer push to the same pull request has superseded.
+# GitHub bills per job by wall-clock time rounded up to the minute, so a run
+# nobody is waiting on still costs full price.
+#
+# `cancel-in-progress` is conditional rather than `true`: these workflows also
+# run on pushes to trunk in some projects, and a trunk run is the record of
+# what is on the default branch. Only pull request runs are cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 # The GITHUB_TOKEN used by Dependabot has read-only permissions by default. We
 # provide write permissions to this workflow so that comments can be left on
 # the pull request.
