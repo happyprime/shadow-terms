@@ -2,12 +2,9 @@
 	"$schema": "https://schemas.wp.org/trunk/wp-env.json",
 	"core": "WordPress/WordPress#7.1-branch",
 	"phpVersion": "8.4",
-	"port": 8940,
+	"port": 8941,
 	"testsEnvironment": false,
 	"plugins": [ "." ],
-	"mappings": {
-		"wp-content/mu-plugins": "./.dev/mu-plugins"
-	},
 	"config": {
 		"WP_DEBUG": true,
 		"WP_DEBUG_LOG": true,

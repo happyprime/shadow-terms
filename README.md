@@ -33,6 +33,30 @@ With the example above, whenever an `organization` is created, a term with the s
 
 Code can then be written to query and display all people or press releases related to an organization.
 
+## Development
+
+Requires Docker, Node 20 or later, and Composer.
+
+```sh
+composer install
+npm install
+npm run env:start
+```
+
+The site runs at http://localhost:8940 (`admin` / `password`) on WordPress 7.1 with Twenty Twenty-Five. `.dev/mu-plugins/shadow-terms-demo.php` registers `organization` and `person` post types and adds Shadow Terms support so posts and people can be assigned an organization. `.dev/seed.php` creates four organizations (Umbrella Labs is a draft), three people, and three posts associated with them. Each organization page lists its related posts and people.
+
+Checks:
+
+```sh
+composer phpcs
+composer phpstan
+npm run lint:package
+npm run env:test:start
+npm run test:php
+```
+
+PHPUnit runs in a second environment on port 8941 so it does not reset the demo site. `npm run env:stop` and `npm run env:test:stop` stop the environments.
+
 ## Changelog
 
 ### 1.2.3
