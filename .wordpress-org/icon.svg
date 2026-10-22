@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+<title id="title">Shadow Terms</title>
+<desc id="desc">A white geometric icon on a circular color badge.</desc>
+<defs>
+  <linearGradient id="badge-shadow-terms" x1="100%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#00CE97"/>
+    <stop offset="28%" stop-color="#00A3BF"/>
+    <stop offset="100%" stop-color="#007A96"/>
+  </linearGradient>
+<mask id="notch-shadow-terms"><rect width="256" height="256" fill="#fff"/><polygon points="201.2,58.4 359.1,32.3 370.6,-111.6 226.7,-99.5" fill="#000" stroke="#000" stroke-width="6.6" stroke-linejoin="round"/></mask>
+</defs>
+<circle cx="128" cy="128" r="118" fill="url(#badge-shadow-terms)" mask="url(#notch-shadow-terms)"/>
+
+  <g class="glyph" transform="translate(128 128) scale(0.85) translate(-128 -128)">
+<!-- The semitransparent duplicate is the shadow term. -->
+  <rect x="105" y="95" width="85" height="93" rx="13" fill="#fff" opacity="0.36"/>
+  <rect x="69" y="69" width="104" height="105" rx="15" fill="none" stroke="#fff" stroke-width="12"/>
+  </g>
+</svg>
