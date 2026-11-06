@@ -177,7 +177,7 @@ npm run env:test:start
 npm run test:php
 ```
 
-PHPUnit runs in a second environment on port 8941 so it does not reset the demo site. `npm run env:stop` and `npm run env:test:stop` stop the environments.
+PHPUnit runs in a second environment on port 8941 so it does not reset the demo site. The test site answers as `example.org`, as CI's does, because under wp-env's `localhost` `wp_mail()` refuses its own From address. CI installs its own test library on the runner. `npm run env:stop` and `npm run env:test:stop` stop the environments.
 
 ## Changelog
 
