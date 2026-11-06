@@ -1,0 +1,42 @@
+{
+	"name": "shadow-terms",
+	"version": "1.2.3",
+	"private": true,
+	"description": "Use terms from generated taxonomies to associate related content.",
+	"author": "Happy Prime",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"plugin",
+		"taxonomy"
+	],
+	"homepage": "https://github.com/happyprime/shadow-terms/",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/happyprime/shadow-terms.git"
+	},
+	"bugs": {
+		"url": "https://github.com/happyprime/shadow-terms/issues"
+	},
+	"engines": {
+		"node": ">=20"
+	},
+	"devDependencies": {
+		"@wordpress/env": "^11.17.0",
+		"@wordpress/npm-package-json-lint-config": "^5.57.0",
+		"npm-package-json-lint": "^11.0.0"
+	},
+	"scripts": {
+		"lint:package": "node ./node_modules/npm-package-json-lint/dist/cli.js ./package.json",
+		"env:start": "wp-env start && npm run env:seed",
+		"env:seed": "wp-env run cli --env-cwd=wp-content/plugins/shadow-terms wp eval-file .dev/seed.php",
+		"env:stop": "wp-env stop",
+		"env:destroy": "wp-env destroy",
+		"env:cli": "wp-env run cli",
+		"env:logs": "wp-env logs",
+		"env:test:start": "wp-env start --config .wp-env.tests.json",
+		"env:test:stop": "wp-env stop --config .wp-env.tests.json",
+		"env:test:destroy": "wp-env destroy --config .wp-env.tests.json",
+		"test:php": "wp-env run cli --config .wp-env.tests.json --env-cwd=wp-content/plugins/shadow-terms vendor/bin/phpunit"
+	}
+}

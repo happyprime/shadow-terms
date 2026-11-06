@@ -1,7 +1,18 @@
 includes:
-  - %rootDir%/../../happyprime/coding-standards/phpstan.neon.dist
+  - vendor/happyprime/coding-standards/phpstan.neon.dist
 
 parameters:
-  level: 7
+  level: 8
+  paths!:
+    - plugin.php
+    - includes
+    - tests
+  excludePaths:
+    - vendor/*
+    - node_modules/*
   ignoreErrors:
-      - '#Parameter \#1 \$postarr of function wp_update_post expects array\{ID\?\: int, post_author\?\: int, post_date\?\: string, post_date_gmt\?\: string, post_content\?\: string, post_content_filtered\?\: string, post_title\?\: string, post_excerpt\?\: string, \.\.\.\}, WP_Post\|null given\.#'
+    -
+      # wp_update_post() accepts a WP_Post, but the stubs type $postarr as an array shape.
+      message: '#^Parameter \#1 \$postarr of function wp_update_post expects array\{#'
+      identifier: argument.type
+      path: tests/*

@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/wp-env.json",
+	"core": "https://wordpress.org/latest.zip",
+	"phpVersion": "8.4",
+	"port": 8941,
+	"autoPort": true,
+	"testsEnvironment": false,
+	"plugins": [ "." ],
+	"config": {
+		"WP_DEBUG": true,
+		"WP_DEBUG_LOG": true,
+		"SCRIPT_DEBUG": true,
+		"WP_TESTS_DOMAIN": "example.org",
+		"WP_HOME": "http://example.org",
+		"WP_SITEURL": "http://example.org"
+	}
+}

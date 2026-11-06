@@ -99,7 +99,9 @@ function get_post_id( int $term_id ): int {
 		]
 	);
 
-	$post_id = array_pop( $query->posts );
+	$post_ids = is_array( $query->posts ) ? $query->posts : [];
+	$post_id  = array_pop( $post_ids );
+
 	return is_numeric( $post_id ) ? (int) $post_id : 0;
 }
 

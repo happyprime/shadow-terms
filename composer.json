@@ -3,25 +3,10 @@
 	"description": "Use terms from generated taxonomies to associate related content.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
-	"minimum-stability": "stable",
-	"repositories": [
-		{
-			"type": "package",
-			"package": {
-				"name": "phpcompatibility/php-compatibility",
-				"type": "phpcodesniffer-standard",
-				"version": "9.99.9",
-				"source": {
-					"url": "https://github.com/PHPCompatibility/PHPCompatibility.git",
-					"type": "git",
-					"reference": "9f7142356b5674164a6f6dbe12a7a1bcc632db21"
-				}
-			}
-		}
-	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"require-dev": {
-		"happyprime/coding-standards": "*",
-		"phpcompatibility/php-compatibility": "9.99.9"
+		"happyprime/coding-standards": "^1.0.0-alpha3"
 	},
 	"scripts": {
 		"phpcs": "vendor/bin/phpcs",
